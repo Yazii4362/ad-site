@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOIRA — 타로 · 사주 · 운세 | 내면의 지혜를 읽다</title>
+
+  <!-- SEO -->
+  <meta name="description" content="MOIRA는 타로·사주·점성술로 당신의 내면을 탐구하는 운세 서비스입니다. 오늘의 타로 카드로 연애운, 직장운, 재물운을 확인하세요.">
+  <meta name="keywords" content="타로, 사주, 운세, 점성술, 오늘의 운세, 연애운, 직장운, 재물운, 타로카드">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://moira.kr/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MOIRA — 타로 · 사주 · 운세">
+  <meta property="og:description" content="당신이 이미 알고 있는 것을, 카드가 말해줍니다. 타로·사주·점성술로 내면의 지혜를 탐구하세요.">
+  <meta property="og:image" content="https://moira.kr/assets/images/og-image.jpg">
+  <meta property="og:url" content="https://moira.kr/">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MOIRA — 타로 · 사주 · 운세">
+  <meta name="twitter:description" content="당신이 이미 알고 있는 것을, 카드가 말해줍니다.">
+  <meta name="twitter:image" content="https://moira.kr/assets/images/og-image.jpg">
+
+  <!-- Fonts — @font-face는 style.css에서 로드 (Interop + SacheonUniverse) -->
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages/index.css">
+
+  <!-- JSON-LD: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MOIRA",
+    "url": "https://moira.kr",
+    "description": "타로·사주·점성술 운세 서비스",
+    "inLanguage": "ko",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://moira.kr/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "타로 결과는 얼마나 정확한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "타로는 예언이 아닌 자기 탐구의 도구입니다. 카드의 상징을 통해 내면의 생각과 감정을 의식의 표면으로 끌어올리는 과정으로, 오락 및 참고 목적으로 활용하시길 권장합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "하루에 몇 번 볼 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "무료 회원은 하루 1회, 프리미엄 회원은 무제한으로 이용하실 수 있습니다. 오늘의 타로는 매일 자정에 초기화됩니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "개인정보는 어떻게 처리되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "입력하신 생년월일 등 개인정보는 운세 계산에만 사용되며, 제3자에게 제공되지 않습니다. 자세한 내용은 개인정보처리방침을 확인해 주세요."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "무료와 유료의 차이는 무엇인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "무료 서비스는 오늘의 타로 1장 뽑기와 기본 운세를 제공합니다. 프리미엄 구독 시 심층 해석, 연간 운세, 궁합 분석, 무제한 이용이 가능합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "사주와 타로를 함께 볼 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네, MOIRA는 타로·사주·점성술을 통합하여 다각도로 운세를 분석합니다. 생년월일시를 입력하면 사주 기반의 맞춤 타로 리딩을 받으실 수 있습니다."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
+
+  <!-- ══════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════ -->
+  <header class="header" role="banner">
+    <div class="container">
+      <div class="header__inner">
+
+        <a href="/" class="header__logo" aria-label="MOIRA 홈으로 이동">
+          <span class="header__logo-text">MOIRA</span>
+        </a>
+
+        <nav class="header__nav" aria-label="주요 메뉴">
+          <ul class="header__nav-list">
+            <li><a href="#services">서비스</a></li>
+            <li><a href="#tarot">타로</a></li>
+            <li><a href="#how-it-works">이용방법</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="/about.html">소개</a></li>
+          </ul>
+        </nav>
+
+        <a href="#services" class="btn btn--primary header__cta">무료 체험</a>
+
+        <button
+          class="header__hamburger"
+          aria-label="메뉴 열기"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <nav
+    id="mobile-nav"
+    class="header__mobile-nav"
+    aria-label="모바일 메뉴"
+    role="dialog"
+    aria-modal="true"
+  >
+    <ul class="header__mobile-nav-list">
+      <li><a href="#services">서비스</a></li>
+      <li><a href="#tarot">타로</a></li>
+      <li><a href="#how-it-works">이용방법</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="/about.html">소개</a></li>
+    </ul>
+    <a href="#services" class="btn btn--primary">무료 체험 시작</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── 1. HERO ── -->
+    <section class="hero" aria-label="히어로 섹션">
+
+      <!-- KV 배경 비디오 -->
+      <video
+        id="kv-video"
+        class="hero__video"
+        preload="auto"
+        autoplay
+        muted
+        loop
+        playsinline
+        aria-hidden="true"
+      >
+        <source src="assets/video/kv-video.webm" type="video/webm">
+        <source src="assets/video/kv-video.mp4"  type="video/mp4">
+      </video>
+
+      <!-- 비디오 위 오버레이 -->
+      <div class="hero__video-overlay" aria-hidden="true"></div>
+
+      <div class="hero__orb hero__orb--a" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--b" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--c" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero__inner">
+          <div class="hero__symbol" aria-hidden="true">✦ ◈ ✦</div>
+
+          <h1 class="hero__title" data-aos="fade-up" data-aos-duration="1000">
+            오늘의 운명을<br><span>펼쳐보세요</span>
+          </h1>
+
+          <p class="hero__sub" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
+            타로 · 사주 · 점성술로 내면의 지혜를 탐구하는 공간<br>
+            당신이 이미 알고 있는 것을, 카드가 말해줍니다
+          </p>
+
+          <div class="hero__cta" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+            <a href="#tarot" class="btn btn--primary btn--lg">무료 타로 보기</a>
+            <a href="#services" class="btn btn--ghost btn--lg">서비스 둘러보기</a>
+          </div>
+
+          <div class="hero__scroll" aria-hidden="true">
+            <div class="hero__scroll-line"></div>
+            <span class="hero__scroll-text">Scroll</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. SERVICES ── -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-eyebrow" data-aos="fade-up">Our Services</div>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">
+          당신을 위한 <span>운세 서비스</span>
+        </h2>
+
+        <div class="services-grid">
+
+          <a href="#tarot" class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card__icon" aria-hidden="true">🃏</div>
+            <h3 class="service-card__title">타로 카드</h3>
+            <p class="service-card__desc">78장의 카드로 현재 상황과 내면의 메시지를 읽어드립니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+          <a href="#services" class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card__icon" aria-hidden="true">💑</div>
+            <h3 class="service-card__title">연애운</h3>
+            <p class="service-card__desc">현재 연애 흐름과 인연의 방향을 타로로 탐색합니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+          <a href="#services" class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card__icon" aria-hidden="true">💼</div>
+            <h3 class="service-card__title">직장운</h3>
+            <p class="service-card__desc">커리어의 흐름과 직장 내 관계를 카드로 살펴봅니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+          <a href="#services" class="service-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card__icon" aria-hidden="true">💰</div>
+            <h3 class="service-card__title">재물운</h3>
+            <p class="service-card__desc">재정 흐름과 기회의 타이밍을 타로로 읽어드립니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+          <a href="#services" class="service-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-card__icon" aria-hidden="true">🌿</div>
+            <h3 class="service-card__title">건강운</h3>
+            <p class="service-card__desc">몸과 마음의 균형을 위한 내면의 메시지를 확인합니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+          <a href="#services" class="service-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-card__icon" aria-hidden="true">☯️</div>
+            <h3 class="service-card__title">사주 · 궁합</h3>
+            <p class="service-card__desc">생년월일로 사주를 분석하고 궁합을 확인합니다</p>
+            <span class="service-card__link">자세히 보기 →</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. 광고 단위 #1 (Google AdSense) ── -->
+    <section class="ad-section" aria-label="광고 영역">
+      <div class="container">
+        <div class="ad-unit ad-unit--responsive" aria-label="광고">
+          <p class="ad-unit__label">광고</p>
+          <!-- Google AdSense 코드 삽입 예정 -->
+          <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. HOW IT WORKS ── -->
+    <section id="how-it-works" class="how-section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="section-eyebrow" data-aos="fade-up">How It Works</div>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">
+          3단계로 <span>시작하세요</span>
+        </h2>
+
+        <div class="steps-grid">
+
+          <div class="step-card" data-aos="fade-right" data-aos-delay="0">
+            <div class="step-card__num" aria-hidden="true">01</div>
+            <div class="step-card__icon" aria-hidden="true">🔮</div>
+            <h3 class="step-card__title">카테고리 선택</h3>
+            <p class="step-card__desc">연애, 직장, 재물 등 궁금한 영역을 선택하세요</p>
+          </div>
+
+          <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-card__num" aria-hidden="true">02</div>
+            <div class="step-card__icon" aria-hidden="true">✍️</div>
+            <h3 class="step-card__title">정보 입력</h3>
+            <p class="step-card__desc">생년월일과 현재 상황을 간단히 입력합니다</p>
+          </div>
+
+          <div class="step-card" data-aos="fade-left" data-aos-delay="200">
+            <div class="step-card__num" aria-hidden="true">03</div>
+            <div class="step-card__icon" aria-hidden="true">🌟</div>
+            <h3 class="step-card__title">결과 확인</h3>
+            <p class="step-card__desc">카드를 뽑고 맞춤 해석을 받아보세요</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. TODAY'S TAROT (Swiper) ── -->
+    <section id="tarot" class="tarot-section">
+      <div class="container">
+        <div class="section-eyebrow" data-aos="fade-up">Today's Tarot</div>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">
+          오늘의 <span>타로 카드</span>
+        </h2>
+        <p class="tarot-section__desc" data-aos="fade-up" data-aos-delay="100">
+          카드를 클릭하면 오늘의 메시지가 공개됩니다
+        </p>
+      </div>
+
+      <div class="swiper swiper--tarot" data-aos="fade-up" data-aos-delay="150" aria-label="오늘의 타로 카드 슬라이더">
+        <div class="swiper-wrapper">
+
+          <!-- Card 0: The Fool -->
+          <div class="swiper-slide">
+            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="바보 카드 뒤집기">
+              <div class="tarot-card__inner">
+                <div class="tarot-card__back">
+                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
+                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
+                </div>
+                <div class="tarot-card__face">
+                  <div class="tarot-card__img">
+                    <img
+                      src="assets/images/cards/0.png"
+                      alt="The Fool 타로 카드"
+                      loading="lazy"
+                      width="240"
+                      height="360"
+                      style="width:100%;height:100%;object-fit:cover;display:block;"
+                    >
+                  </div>
+                  <div class="tarot-card__body">
+                    <p class="tarot-card__tag">Major Arcana · 0</p>
+                    <h3 class="tarot-card__name">바보 · The Fool</h3>
+                    <p class="tarot-card__keyword">새로운 시작, 순수함, 모험</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card I: The Magician -->
+          <div class="swiper-slide">
+            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="마법사 카드 뒤집기">
+              <div class="tarot-card__inner">
+                <div class="tarot-card__back">
+                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
+                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
+                </div>
+                <div class="tarot-card__face">
+                  <div class="tarot-card__img">
+                    <img
+                      src="assets/images/cards/I.png"
+                      alt="The Magician 타로 카드"
+                      loading="lazy"
+                      width="240"
+                      height="360"
+                      style="width:100%;height:100%;object-fit:cover;display:block;"
+                    >
+                  </div>
+                  <div class="tarot-card__body">
+                    <p class="tarot-card__tag">Major Arcana · I</p>
+                    <h3 class="tarot-card__name">마법사 · The Magician</h3>
+                    <p class="tarot-card__keyword">의지, 창조력, 실현</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card II: The High Priestess -->
+          <div class="swiper-slide">
+            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="여사제 카드 뒤집기">
+              <div class="tarot-card__inner">
+                <div class="tarot-card__back">
+                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
+                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
+                </div>
+                <div class="tarot-card__face">
+                  <div class="tarot-card__img">
+                    <img
+                      src="assets/images/cards/II.png"
+                      alt="The High Priestess 타로 카드"
+                      loading="lazy"
+                      width="240"
+                      height="360"
+                      style="width:100%;height:100%;object-fit:cover;display:block;"
+                    >
+                  </div>
+                  <div class="tarot-card__body">
+                    <p class="tarot-card__tag">Major Arcana · II</p>
+                    <h3 class="tarot-card__name">여사제 · High Priestess</h3>
+                    <p class="tarot-card__keyword">직관, 신비, 내면의 지식</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination" aria-label="슬라이드 페이지네이션"></div>
+      </div>
+    </section>
+
+    <!-- ── 6. TESTIMONIALS (Swiper) ── -->
+    <section class="testimonials-section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="section-eyebrow" data-aos="fade-up">Reviews</div>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">
+          사용자 <span>후기</span>
+        </h2>
+      </div>
+
+      <div class="swiper swiper--testimonial" data-aos="fade-up" data-aos-delay="100" aria-label="사용자 후기 슬라이더">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="별점 5점">★★★★★</div>
+              <p class="testimonial-card__text">타로 결과가 지금 제 상황을 너무 정확하게 짚어줘서 소름이 돋았어요. 위로가 많이 됐습니다.</p>
+              <div class="testimonial-card__meta">
+                <span class="testimonial-card__author">j***n</span>
+                <span class="testimonial-card__date">2026.03.15</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="별점 5점">★★★★★</div>
+              <p class="testimonial-card__text">직장 고민이 많았는데 카드 해석이 제 마음속 이야기를 그대로 해줬어요. 결정하는 데 도움이 됐습니다.</p>
+              <div class="testimonial-card__meta">
+                <span class="testimonial-card__author">m***i</span>
+                <span class="testimonial-card__date">2026.03.10</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="별점 4점">★★★★☆</div>
+              <p class="testimonial-card__text">디자인이 너무 예쁘고 해석이 깊이 있어요. 매일 아침 오늘의 카드 보는 게 루틴이 됐어요.</p>
+              <div class="testimonial-card__meta">
+                <span class="testimonial-card__author">s***y</span>
+                <span class="testimonial-card__date">2026.03.08</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="별점 5점">★★★★★</div>
+              <p class="testimonial-card__text">연애 타로가 정말 도움이 됐어요. 억지로 결론 내리지 않고 제 감정을 돌아보게 해줬습니다.</p>
+              <div class="testimonial-card__meta">
+                <span class="testimonial-card__author">h***e</span>
+                <span class="testimonial-card__date">2026.02.28</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="별점 5점">★★★★★</div>
+              <p class="testimonial-card__text">사주와 타로를 함께 볼 수 있어서 좋아요. 해석이 단순하지 않고 맥락이 있어서 신뢰가 갑니다.</p>
+              <div class="testimonial-card__meta">
+                <span class="testimonial-card__author">k***a</span>
+                <span class="testimonial-card__date">2026.02.20</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination" aria-label="슬라이드 페이지네이션"></div>
+      </div>
+    </section>
+
+    <!-- ── 7. 광고 단위 #2 (쿠팡 파트너스) ── -->
+    <section class="ad-section ad-section--product" aria-label="광고 영역">
+      <div class="container">
+        <p class="ad-section__label">파트너 추천 상품</p>
+        <div class="ad-unit ad-unit--rectangle" style="margin: 0 auto;" aria-label="광고">
+          <p class="ad-unit__label">광고</p>
+          <!-- 쿠팡 파트너스 광고 코드 삽입 예정 -->
+          <!-- 이 포스팅은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받을 수 있습니다. -->
+        </div>
+        <p style="font-size: 11px; color: var(--color-text-muted); text-align: center; margin-top: 8px;">
+          이 섹션은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받을 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 8. FAQ ── -->
+    <section id="faq" class="faq-section" style="background: var(--color-bg-section); border-top: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="section-eyebrow" data-aos="fade-up">FAQ</div>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">
+          자주 묻는 <span>질문</span>
+        </h2>
+
+        <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false" aria-controls="faq-1">
+              타로 결과는 얼마나 정확한가요?
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__body" id="faq-1" role="region">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">타로는 예언이 아닌 자기 탐구의 도구입니다. 카드의 상징을 통해 내면의 생각과 감정을 의식의 표면으로 끌어올리는 과정으로, 오락 및 참고 목적으로 활용하시길 권장합니다. 중요한 결정의 근거로 사용하지 마세요.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false" aria-controls="faq-2">
+              하루에 몇 번 볼 수 있나요?
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__body" id="faq-2" role="region">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">무료 회원은 하루 1회, 프리미엄 회원은 무제한으로 이용하실 수 있습니다. 오늘의 타로는 매일 자정에 초기화됩니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false" aria-controls="faq-3">
+              개인정보는 어떻게 처리되나요?
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__body" id="faq-3" role="region">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">입력하신 생년월일 등 개인정보는 운세 계산에만 사용되며, 제3자에게 제공되지 않습니다. 자세한 내용은 <a href="/privacy.html" style="color: var(--color-accent);">개인정보처리방침</a>을 확인해 주세요.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false" aria-controls="faq-4">
+              무료와 유료의 차이는 무엇인가요?
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__body" id="faq-4" role="region">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">무료 서비스는 오늘의 타로 1장 뽑기와 기본 운세를 제공합니다. 프리미엄 구독 시 심층 해석, 연간 운세, 궁합 분석, 무제한 이용이 가능합니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false" aria-controls="faq-5">
+              사주와 타로를 함께 볼 수 있나요?
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__body" id="faq-5" role="region">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">네, MOIRA는 타로·사주·점성술을 통합하여 다각도로 운세를 분석합니다. 생년월일시를 입력하면 사주 기반의 맞춤 타로 리딩을 받으실 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 9. CTA BANNER ── -->
+    <section class="cta-section" aria-label="서비스 시작 유도">
+      <div class="container">
+        <div class="cta-inner" data-aos="zoom-in">
+          <div class="cta-symbol" aria-hidden="true">✦ ◈ ✦</div>
+          <h2 class="cta-title">지금 바로 시작하세요</h2>
+          <p class="cta-desc">오늘의 카드가 당신에게 전하는 메시지를 확인해보세요.<br>무료로 첫 번째 타로 리딩을 받아보실 수 있습니다.</p>
+          <a href="#tarot" class="btn btn--primary btn--lg">무료 타로 보기</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+
+      <div class="footer__grid">
+
+        <!-- Brand -->
+        <div class="footer__brand">
+          <span class="footer__brand-logo">MOIRA</span>
+          <p class="footer__brand-desc">타로·사주·점성술로 내면의 지혜를 탐구하는 공간. 당신이 이미 알고 있는 것을, 카드가 말해줍니다.</p>
+          <div class="footer__social" aria-label="소셜 미디어">
+            <a href="#" class="footer__social-link" aria-label="인스타그램">📷</a>
+            <a href="#" class="footer__social-link" aria-label="유튜브">▶</a>
+            <a href="#" class="footer__social-link" aria-label="카카오톡">💬</a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="footer__col-title">서비스</h3>
+          <nav class="footer__links" aria-label="서비스 링크">
+            <a href="#tarot">오늘의 타로</a>
+            <a href="#services">연애운</a>
+            <a href="#services">직장운</a>
+            <a href="#services">재물운</a>
+            <a href="#services">사주 · 궁합</a>
+          </nav>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h3 class="footer__col-title">고객지원</h3>
+          <nav class="footer__links" aria-label="고객지원 링크">
+            <a href="/about.html">서비스 소개</a>
+            <a href="/contact.html">문의하기</a>
+            <a href="#faq">자주 묻는 질문</a>
+          </nav>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h3 class="footer__col-title">법적 고지</h3>
+          <nav class="footer__links" aria-label="법적 고지 링크">
+            <a href="/terms.html">이용약관</a>
+            <a href="/privacy.html">개인정보처리방침</a>
+          </nav>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__bottom-row">
+          <p class="footer__copyright">© 2026 MOIRA. All rights reserved.</p>
+          <nav class="footer__legal-nav" aria-label="법적 고지">
+            <a href="/terms.html">이용약관</a>
+            <a href="/privacy.html">개인정보처리방침</a>
+            <a href="/contact.html">문의하기</a>
+          </nav>
+        </div>
+        <p class="footer__disclaimer">
+          본 서비스는 오락 및 참고 목적으로만 제공됩니다. 타로·사주·운세 결과는 실제 사실이 아니며 중요한 결정(의료·법률·재정 등)의 근거로 사용하지 마십시오. 모든 콘텐츠는 자기 탐구와 오락을 위한 것입니다.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/header.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

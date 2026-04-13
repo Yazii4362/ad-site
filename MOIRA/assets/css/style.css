@@ -1,0 +1,356 @@
+/* ============================================================
+   MOIRA — style.css  (Cosmic Jelly · 애정운 Edition)
+   공통 변수 · Reset · Typography · Layout
+   ============================================================ */
+
+/* ── Interop — 바디 전체 폰트 ── */
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Thin.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Thin.woff') format('woff');
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-ExtraLight.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Light.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Regular.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Medium.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-SemiBold.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Bold.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-Bold.woff') format('woff');
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interop';
+  src: url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-ExtraBold.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/payw-org/Interop/main/web/fonts/Interop-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* ── SacheonUniverse — 브랜드 타이틀 전용 ── */
+@font-face {
+  font-family: 'SacheonUniverse';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/SacheonUju-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Brand Colors ── */
+  --c-lavender:       #D8B4FE;   /* Mystic Lavender — 주조색 */
+  --c-lavender-deep:  #A855F7;
+  --c-lavender-pale:  #F3E8FF;
+  --c-pink:           #FFC2E2;   /* Marshmallow Pink — 포인트 */
+  --c-pink-deep:      #F472B6;
+  --c-pink-pale:      #FFF0F7;
+  --c-violet:         #4C1D95;   /* Midnight Violet — 텍스트 */
+  --c-violet-mid:     #6D28D9;
+  --c-mint:           #BFFCF9;   /* Aurora Mint — 강조 */
+  --c-mint-deep:      #67E8F9;
+  --c-gold:           #FDE68A;   /* Soft Gold — 별빛 */
+
+  /* ── Backgrounds ── */
+  --c-bg:             #1A0A2E;   /* 깊은 밤하늘 */
+  --c-bg-2:           #220D38;
+  --c-bg-card:        #2D1254;
+  --c-bg-section:     #1E0C35;
+  --c-surface:        rgba(216, 180, 254, 0.08);
+  --c-surface-2:      rgba(255, 194, 226, 0.08);
+  --c-glass:          rgba(255, 255, 255, 0.07);
+  --c-glass-border:   rgba(255, 255, 255, 0.15);
+
+  /* ── Text ── */
+  --c-text:           #F9F0FF;
+  --c-text-sub:       #DDD6FE;
+  --c-text-muted:     #A78BFA;
+  --c-text-dim:       #7C3AED;
+
+  /* ── Borders ── */
+  --c-border:         rgba(216, 180, 254, 0.2);
+  --c-border-strong:  rgba(216, 180, 254, 0.45);
+
+  /* ── Shadows / Glows ── */
+  --glow-lavender:    0 0 40px rgba(168, 85, 247, 0.35);
+  --glow-pink:        0 0 40px rgba(244, 114, 182, 0.35);
+  --glow-mint:        0 0 30px rgba(103, 232, 249, 0.3);
+  --shadow-float:     0 20px 60px rgba(76, 29, 149, 0.4), 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-card:      0 8px 32px rgba(76, 29, 149, 0.3);
+
+  /* ── Typography ── */
+  --font-brand:   'SacheonUniverse', 'Interop', system-ui, sans-serif; /* 브랜드 타이틀 전용 */
+  --font-display: 'SacheonUniverse', 'Interop', system-ui, sans-serif;
+  --font-serif:   'Interop', system-ui, sans-serif;
+  --font-sans:    'Interop', system-ui, sans-serif;
+
+  --fs-xs:   11px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   18px;
+  --fs-lg:   22px;
+  --fs-xl:   28px;
+  --fs-2xl:  36px;
+  --fs-3xl:  48px;
+  --fs-4xl:  64px;
+
+  --lh-tight:  1.2;
+  --lh-snug:   1.4;
+  --lh-normal: 1.65;
+  --lh-loose:  1.9;
+
+  /* ── Spacing ── */
+  --sp-1:  4px;  --sp-2:  8px;  --sp-3:  12px; --sp-4:  16px;
+  --sp-5:  20px; --sp-6:  24px; --sp-8:  32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px;
+
+  /* ── Layout ── */
+  --container-max: 1200px;
+  --section-py:    var(--sp-20);
+  --section-py-md: var(--sp-12);
+  --section-py-sm: var(--sp-10);
+
+  /* ── Radius — Cosmic Jelly: 크고 둥글게 ── */
+  --r-sm:   8px;
+  --r-md:   16px;
+  --r-lg:   24px;
+  --r-xl:   32px;
+  --r-2xl:  48px;
+  --r-full: 9999px;
+
+  /* ── Transitions ── */
+  --t-fast:  150ms ease;
+  --t-base:  280ms ease;
+  --t-slow:  500ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* ── Z-index ── */
+  --z-base:   1;
+  --z-above:  10;
+  --z-modal:  100;
+  --z-header: 200;
+  --z-toast:  300;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  font-size: var(--fs-base);
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: 'Interop', system-ui, sans-serif;
+  line-height: var(--lh-normal);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 별빛 노이즈 오버레이 */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, textarea, select { font-family: inherit; font-size: inherit; }
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: var(--lh-tight);
+  color: var(--c-text);
+}
+
+p { line-height: var(--lh-loose); color: var(--c-text-sub); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+/* ── Layout ── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+section {
+  position: relative;
+  z-index: var(--z-base);
+  padding-block: var(--section-py);
+}
+
+/* ── Section Labels ── */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-mint);
+  margin-bottom: var(--sp-4);
+}
+
+.section-eyebrow::before {
+  content: '✦';
+  font-size: 10px;
+  color: var(--c-pink);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl));
+  font-weight: 500;
+  color: var(--c-text);
+  margin-bottom: var(--sp-12);
+  line-height: var(--lh-snug);
+}
+
+.section-title span { color: var(--c-lavender); }
+
+/* ── Glassmorphism Card Base ── */
+.glass {
+  background: var(--c-glass);
+  border: 1px solid var(--c-glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--r-xl);
+}
+
+/* ── Glow Divider ── */
+.divider {
+  display: flex; align-items: center; gap: var(--sp-4);
+  margin-block: var(--sp-12); opacity: 0.4;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-lavender), transparent);
+}
+.divider__symbol { font-size: 16px; color: var(--c-pink); }
+
+/* ── Skip Link ── */
+.skip-link {
+  position: absolute; top: -100%; left: var(--sp-4);
+  z-index: var(--z-toast);
+  padding: var(--sp-3) var(--sp-6);
+  background: var(--c-lavender); color: var(--c-violet);
+  font-weight: 700; border-radius: var(--r-full);
+  transition: top var(--t-fast);
+}
+.skip-link:focus { top: var(--sp-4); }
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--c-lavender);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: var(--c-violet-mid); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--c-lavender-deep); }
+
+/* ── Selection ── */
+::selection { background: rgba(216, 180, 254, 0.35); color: var(--c-text); }
+
+/* ── SR Only ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ── Ad Units ── */
+.ad-unit {
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--c-border);
+  border-radius: var(--r-lg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 90px; padding: var(--sp-3); overflow: hidden;
+}
+.ad-unit__label {
+  font-family: var(--font-sans);
+  font-size: 10px; color: var(--c-text-muted);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: var(--sp-1);
+}
+.ad-unit--responsive { width: 100%; max-width: 728px; margin-inline: auto; }
+.ad-unit--rectangle  { width: 300px; height: 250px; }
+.ad-section { padding-block: var(--sp-8); }
+.ad-section--product .ad-section__label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs); color: var(--c-text-muted);
+  letter-spacing: 0.1em; text-align: center; margin-bottom: var(--sp-4);
+}
+
+/* ── Utilities ── */
+.text-center { text-align: center; }
+.text-accent  { color: var(--c-lavender); }
+.text-pink    { color: var(--c-pink); }
+.text-mint    { color: var(--c-mint); }
+.text-muted   { color: var(--c-text-muted); }
+
+/* ── Responsive ── */
+@media (max-width: 1023px) { section { padding-block: var(--section-py-md); } }
+@media (max-width: 767px)  {
+  section { padding-block: var(--section-py-sm); }
+  .container { padding-inline: var(--sp-5); }
+  .section-title { margin-bottom: var(--sp-8); }
+}

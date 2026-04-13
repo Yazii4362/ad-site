@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://moira.kr/sitemap.xml

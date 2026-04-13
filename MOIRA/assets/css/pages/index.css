@@ -1,0 +1,245 @@
+/* ============================================================
+   MOIRA — pages/index.css  (Cosmic Jelly · 애정운 Edition)
+   ============================================================ */
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding-block: 0;
+}
+
+/* ── KV 배경 비디오 ── */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  /* GPU 가속 — 렌더링 성능 향상 */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 저사양/저전력 모드: 모션 줄이기 설정 시 비디오 숨김 */
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { display: none; }
+}
+
+/* 비디오 위 어두운 오버레이 — 텍스트 가독성 확보 */
+.hero__video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 10, 46, 0.55);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); pointer-events: none;
+  z-index: 2;
+}
+
+.hero__orb--a {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+  top: -150px; left: -150px;
+}
+
+.hero__orb--b {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+}
+
+.hero__orb--c {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(191, 252, 249, 0.15) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+
+.hero__inner {
+  position: relative; z-index: 3;
+  text-align: center; padding-top: 80px;
+}
+
+/* ── 브랜드 심볼 ── */
+.hero__symbol {
+  font-family: var(--font-display);
+  font-size: 20px; letter-spacing: 0.4em;
+  color: var(--c-pink); opacity: 0.6;
+  margin-bottom: var(--sp-6);
+}
+
+/* ── 메인 타이틀 — HansuwonHanullim 적용 ── */
+.hero__title {
+  font-family: var(--font-brand);
+  font-size: clamp(40px, 8vw, 80px);
+  font-weight: normal;
+  line-height: 1.15;
+  color: var(--c-text);
+  margin-bottom: var(--sp-6);
+  letter-spacing: 0.02em;
+}
+
+.hero__title span {
+  color: var(--c-lavender);
+}
+
+.hero__sub {
+  font-family: var(--font-serif);
+  font-size: clamp(var(--fs-sm), 2vw, var(--fs-base));
+  font-weight: 300; color: var(--c-text-sub);
+  line-height: var(--lh-loose);
+  max-width: 520px; margin-inline: auto; margin-bottom: var(--sp-10);
+}
+
+.hero__cta {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--sp-4); flex-wrap: wrap;
+}
+
+.hero__scroll {
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--sp-3);
+  margin-top: var(--sp-16); opacity: 0.3;
+}
+
+.hero__scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--c-lavender), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+.hero__scroll-text {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-text-muted);
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.7; transform: scaleY(1.1); }
+}
+
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+.services-section {
+  background: var(--c-bg-section);
+  border-top: 1px solid var(--c-border);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+
+/* ══════════════════════════════════════════
+   TAROT SECTION
+══════════════════════════════════════════ */
+.tarot-section { overflow: hidden; }
+
+.tarot-section__desc {
+  font-family: var(--font-sans); font-size: var(--fs-sm);
+  color: var(--c-text-muted); letter-spacing: 0.05em;
+  margin-bottom: var(--sp-8); margin-top: calc(-1 * var(--sp-8));
+}
+
+/* 타로 슬라이더 — 중앙 정렬 래퍼 */
+.swiper--tarot {
+  max-width: 900px;          /* 슬라이더 최대 너비 제한 */
+  margin-inline: auto;       /* 좌우 중앙 정렬 */
+  padding: var(--sp-4) var(--sp-6) var(--sp-12) !important;
+  overflow: visible !important;
+}
+
+.swiper--tarot .swiper-slide {
+  max-width: 260px;          /* 카드 한 장 최대 너비 */
+}
+
+/* 후기 슬라이더 — max-width 제한 */
+.swiper--testimonial {
+  max-width: 1000px;
+  margin-inline: auto;
+  padding: var(--sp-4) var(--sp-6) var(--sp-12) !important;
+}
+
+.swiper--testimonial .swiper-slide {
+  max-width: 380px;          /* 후기 카드 한 장 최대 너비 */
+}
+
+/* ══════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════ */
+.cta-section {
+  background: var(--c-bg-section);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  position: relative; overflow: hidden;
+}
+
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative; z-index: 1; text-align: center;
+  max-width: 600px; margin-inline: auto;
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-6);
+}
+
+.cta-symbol {
+  font-family: var(--font-display); font-size: 18px;
+  letter-spacing: 0.4em; color: var(--c-pink); opacity: 0.5;
+}
+
+/* ── CTA 타이틀 — HansuwonHanullim 적용 ── */
+.cta-title {
+  font-family: var(--font-brand);
+  font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl));
+  font-weight: normal; color: var(--c-text);
+  letter-spacing: 0.02em;
+}
+
+.cta-desc {
+  font-family: var(--font-serif); font-size: var(--fs-base);
+  font-weight: 300; color: var(--c-text-sub); line-height: var(--lh-loose);
+}
+
+/* ══════════════════════════════════════════
+   SECTION TITLE OVERRIDE — HansuwonHanullim
+══════════════════════════════════════════ */
+.section-title {
+  font-family: var(--font-brand);
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+}
+
+@media (max-width: 767px) {
+  .hero__cta {
+    flex-direction: column; align-items: stretch; padding-inline: var(--sp-4);
+  }
+  .hero__cta .btn { text-align: center; }
+  .swiper--tarot,
+  .swiper--testimonial { padding-inline: var(--sp-5) !important; }
+  .tarot-section__desc { text-align: center; }
+}
