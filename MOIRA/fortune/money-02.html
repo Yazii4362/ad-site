@@ -3,32 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>애정운세 — 곁사람하는 그 사람 | MOIRA 타로</title>
-
-  <!-- SEO -->
-  <meta name="description" content="곁사람하는 그 사람, 나를 복잡하게 생각할까? 타로 카드로 확인해보세요.">
-
-  <!-- AOS -->
+  <title>금전운세 — 투자 결정 | MOIRA 타로</title>
+  <meta name="description" content="지금 이 투자, 과연 해도 괜찮을까?">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/pages/index.css">
-  <link rel="stylesheet" href="assets/css/pages/tarot-result.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/index.css">
+  <link rel="stylesheet" href="../assets/css/pages/tarot-result.css">
 </head>
 <body>
-
-  <!-- Skip Link -->
   <a class="skip-link" href="#main-content">본문 바로가기</a>
-
-  <!-- HEADER -->
   <header class="header" role="banner">
     <div class="container">
       <div class="header__inner">
-        <a href="/" class="header__logo" aria-label="MOIRA 홈으로 이동">
-          <span class="header__logo-text">MOIRA</span>
-        </a>
+        <a href="/" class="header__logo" aria-label="MOIRA 홈으로 이동"><span class="header__logo-text">MOIRA</span></a>
         <nav class="header__nav" aria-label="주요 메뉴">
           <ul class="header__nav-list">
             <li><a href="/#services">서비스</a></li>
@@ -43,8 +31,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Mobile Nav -->
   <nav id="mobile-nav" class="header__mobile-nav" aria-label="모바일 메뉴" role="dialog" aria-modal="true">
     <ul class="header__mobile-nav-list">
       <li><a href="/#services">서비스</a></li>
@@ -54,84 +40,58 @@
     <a href="/" class="btn btn--primary">홈으로</a>
   </nav>
 
-  <!-- MAIN -->
   <main id="main-content" style="padding-top: 100px; min-height: 100vh;">
-
-    <!-- 질문 헤더 -->
     <section style="padding: var(--sp-16) 0 var(--sp-4);">
       <div class="container">
         <div style="text-align: center; max-width: 640px; margin: 0 auto;">
-          <div class="section-eyebrow" data-aos="fade-up">💗 애정운세</div>
+          <div class="section-eyebrow" data-aos="fade-up">💰 금전운세</div>
           <h1 class="section-title" data-aos="fade-up" data-aos-delay="50"
               style="font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl)); margin-bottom: var(--sp-5);">
-            곁사람하는 그 사람,<br><span>나를 복잡하게 생각할까?</span>
+            지금 이 투자,<br><span>과연 해도 괜찮을까?</span>
           </h1>
-          <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; margin-bottom: var(--sp-6);"
-               data-aos="fade-up" data-aos-delay="100">
-            <span class="badge badge--pink">행복</span>
-            <span class="badge badge--pink">사랑</span>
+          <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; margin-bottom: var(--sp-6);" data-aos="fade-up" data-aos-delay="100">
+            <span class="badge badge--lavender">투자 결정</span>
           </div>
-          <p data-aos="fade-up" data-aos-delay="150"
-             style="font-family: var(--font-serif); font-size: var(--fs-base); color: var(--c-text-sub); line-height: var(--lh-loose);">
-            마음을 가다듬고 카드를 한 장 선택해주세요.<br>
-            당신의 질문에 대한 답이 카드 속에 담겨 있어요.
+          <p data-aos="fade-up" data-aos-delay="150" style="font-family: var(--font-serif); font-size: var(--fs-base); color: var(--c-text-sub); line-height: var(--lh-loose);">
+            마음을 가다듬고 카드를 한 장 선택해주세요.<br>당신의 질문에 대한 답이 카드 속에 담겨 있어요.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- 카드 선택 -->
     <section class="card-select-section">
       <div class="container">
-        <!-- JS가 카드를 동적으로 렌더링 -->
         <div class="card-select-grid" id="card-container" role="group" aria-label="타로 카드 선택"></div>
-
-        <!-- 결과 섹션 -->
         <div id="result-section" class="result-section" aria-live="polite" aria-atomic="true">
           <div class="result-card">
-
-            <!-- 1. 카드 비주얼 + 해시태그 -->
             <div class="result-card__visual">
-              <div class="result-card__img-wrap">
-                <img id="result-img" src="" alt="" width="160" height="240">
-              </div>
+              <div class="result-card__img-wrap"><img id="result-img" src="" alt="" width="160" height="240"></div>
               <p id="result-arcana" class="result-card__arcana"></p>
               <h2 id="result-name" class="result-card__name"></h2>
               <div id="result-tags" class="result-card__tags" role="list"></div>
             </div>
-
-            <!-- 2. 게이지 바 -->
             <div class="result-card__gauge">
               <div class="gauge-label">
-                <span class="gauge-label__text">이 카드의 연애 긍정 지수</span>
+                <span class="gauge-label__text">이 카드의 긍정 지수</span>
                 <span id="gauge-value" class="gauge-label__value">0%</span>
               </div>
-              <div class="gauge-track" role="progressbar"
-                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                   aria-label="연애 긍정 지수">
-                <div id="gauge-fill" class="gauge-fill gauge-fill--love"></div>
+              <div class="gauge-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="긍정 지수">
+                <div id="gauge-fill" class="gauge-fill gauge-fill--money"></div>
               </div>
             </div>
-
-            <!-- 3. 메인 리딩 -->
             <div class="result-card__reading">
               <p class="reading-intro">Card Reading</p>
-              <p id="reading-intro-text"   class="reading-paragraph"></p>
-              <p id="reading-core-text"    class="reading-paragraph reading-paragraph--core"></p>
-              <p id="reading-answer-text"  class="reading-paragraph reading-paragraph--answer"></p>
+              <p id="reading-intro-text" class="reading-paragraph"></p>
+              <p id="reading-core-text" class="reading-paragraph reading-paragraph--core"></p>
+              <p id="reading-answer-text" class="reading-paragraph reading-paragraph--answer"></p>
             </div>
-
-            <!-- 4. 행운의 팁 -->
             <div class="result-card__lucky">
               <p class="lucky-header">오늘의 행운 팁</p>
               <div class="lucky-grid">
                 <div class="lucky-item">
                   <span class="lucky-item__label">행운의 색상</span>
                   <span id="lucky-color" class="lucky-item__value">
-                    <span class="color-chip">
-                      <span id="lucky-color-dot" class="color-chip__dot"></span>
-                      <span id="lucky-color-name"></span>
-                    </span>
+                    <span class="color-chip"><span id="lucky-color-dot" class="color-chip__dot"></span><span id="lucky-color-name"></span></span>
                   </span>
                 </div>
                 <div class="lucky-item">
@@ -140,24 +100,17 @@
                 </div>
               </div>
             </div>
-
-            <!-- CTA -->
             <div class="result-card__cta">
-              <a href="/love.html" class="btn btn--secondary">다른 질문 보기</a>
+              <a href="money.html" class="btn btn--secondary">다른 질문 보기</a>
               <button id="retry-btn" class="btn btn--ghost">다시 뽑기</button>
               <a href="/" class="btn btn--ghost">홈으로</a>
             </div>
-
           </div>
         </div>
-        <!-- /result-section -->
-
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">
@@ -167,48 +120,38 @@
         </div>
         <div>
           <h3 class="footer__col-title">서비스</h3>
-          <nav class="footer__links" aria-label="서비스 링크">
+          <nav class="footer__links">
             <a href="/#tarot">오늘의 타로</a>
-            <a href="/love.html">애정운세</a>
+            <a href="/fortune/love.html">애정운세</a>
+            <a href="/fortune/money.html">금전운세</a>
+            <a href="/fortune/career.html">직업운세</a>
           </nav>
         </div>
         <div>
           <h3 class="footer__col-title">고객지원</h3>
-          <nav class="footer__links" aria-label="고객지원 링크">
-            <a href="/#faq">자주 묻는 질문</a>
-          </nav>
+          <nav class="footer__links"><a href="/#faq">자주 묻는 질문</a></nav>
         </div>
         <div>
           <h3 class="footer__col-title">법적 고지</h3>
-          <nav class="footer__links" aria-label="법적 고지 링크">
+          <nav class="footer__links">
             <a href="/terms.html">이용약관</a>
             <a href="/privacy.html">개인정보처리방침</a>
           </nav>
         </div>
       </div>
       <div class="footer__bottom">
-        <div class="footer__bottom-row">
-          <p class="footer__copyright">© 2026 MOIRA. All rights reserved.</p>
-        </div>
-        <p class="footer__disclaimer">
-          본 서비스는 오락 및 참고 목적으로만 제공됩니다. 타로·운세 결과는 실제 사실이 아니며 중요한 결정의 근거로 사용하지 마십시오.
-        </p>
+        <div class="footer__bottom-row"><p class="footer__copyright">© 2026 MOIRA. All rights reserved.</p></div>
+        <p class="footer__disclaimer">본 서비스는 오락 및 참고 목적으로만 제공됩니다. 타로·운세 결과는 실제 사실이 아니며 중요한 결정의 근거로 사용하지 마십시오.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="assets/js/header.js"></script>
-  <script src="assets/js/tarot-page.js"></script>
-
+  <script src="../assets/js/header.js"></script>
+  <script src="../assets/js/tarot-page.js"></script>
   <script>
     AOS.init({ duration: 800, once: true, offset: 80 });
-
-    const QUESTION_INTRO = '질문자님이 궁금해하시는 그 사람의 마음에 대해 카드를 펼쳐보았습니다.';
-    const QUESTION_KEY   = 'q1_feeling';
-    initTarotPage(QUESTION_INTRO, QUESTION_KEY);
+    initTarotPage('질문자님의 투자 결정에 대해 카드를 펼쳐보았습니다.', 'q2_investment', 'money');
   </script>
-
 </body>
 </html>

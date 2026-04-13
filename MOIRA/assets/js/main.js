@@ -166,13 +166,6 @@ function initSectionObserver() {
   sections.forEach((s) => observer.observe(s));
 }
 
-/* ── 별점 렌더링 유틸 ── */
-function renderStars(count, max = 5) {
-  return Array.from({ length: max }, (_, i) =>
-    `<span aria-hidden="true">${i < count ? '★' : '☆'}</span>`
-  ).join('');
-}
-
 /* ── DOMContentLoaded ── */
 document.addEventListener('DOMContentLoaded', () => {
   initAOS();

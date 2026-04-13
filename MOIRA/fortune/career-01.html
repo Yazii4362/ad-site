@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>애정운세 — 썸 타는 우리 | MOIRA 타로</title>
-  <meta name="description" content="썸 타는 우리, 연애로 발전할 수 있을까? 타로 카드로 확인해보세요.">
+  <title>직업운세 — 이직 결정 | MOIRA 타로</title>
+  <meta name="description" content="이직 or 퇴직, 지금 결단을 내려도 될까?">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/pages/index.css">
-  <link rel="stylesheet" href="assets/css/pages/tarot-result.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/index.css">
+  <link rel="stylesheet" href="../assets/css/pages/tarot-result.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">본문 바로가기</a>
@@ -44,14 +44,13 @@
     <section style="padding: var(--sp-16) 0 var(--sp-4);">
       <div class="container">
         <div style="text-align: center; max-width: 640px; margin: 0 auto;">
-          <div class="section-eyebrow" data-aos="fade-up">💗 애정운세</div>
+          <div class="section-eyebrow" data-aos="fade-up">💼 직업운세</div>
           <h1 class="section-title" data-aos="fade-up" data-aos-delay="50"
               style="font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl)); margin-bottom: var(--sp-5);">
-            썸 타는 우리,<br><span>연애로 발전할 수 있을까?</span>
+            이직 or 퇴직,<br><span>지금 결단을 내려도 될까?</span>
           </h1>
           <div style="display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; margin-bottom: var(--sp-6);" data-aos="fade-up" data-aos-delay="100">
-            <span class="badge badge--pink">썸</span>
-            <span class="badge badge--pink">발전</span>
+            <span class="badge badge--mint">이직 결정</span>
           </div>
           <p data-aos="fade-up" data-aos-delay="150" style="font-family: var(--font-serif); font-size: var(--fs-base); color: var(--c-text-sub); line-height: var(--lh-loose);">
             마음을 가다듬고 카드를 한 장 선택해주세요.<br>당신의 질문에 대한 답이 카드 속에 담겨 있어요.
@@ -73,11 +72,11 @@
             </div>
             <div class="result-card__gauge">
               <div class="gauge-label">
-                <span class="gauge-label__text">이 카드의 연애 긍정 지수</span>
+                <span class="gauge-label__text">이 카드의 긍정 지수</span>
                 <span id="gauge-value" class="gauge-label__value">0%</span>
               </div>
-              <div class="gauge-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="연애 긍정 지수">
-                <div id="gauge-fill" class="gauge-fill gauge-fill--love"></div>
+              <div class="gauge-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="긍정 지수">
+                <div id="gauge-fill" class="gauge-fill gauge-fill--career"></div>
               </div>
             </div>
             <div class="result-card__reading">
@@ -102,7 +101,7 @@
               </div>
             </div>
             <div class="result-card__cta">
-              <a href="/love.html" class="btn btn--secondary">다른 질문 보기</a>
+              <a href="career.html" class="btn btn--secondary">다른 질문 보기</a>
               <button id="retry-btn" class="btn btn--ghost">다시 뽑기</button>
               <a href="/" class="btn btn--ghost">홈으로</a>
             </div>
@@ -121,7 +120,12 @@
         </div>
         <div>
           <h3 class="footer__col-title">서비스</h3>
-          <nav class="footer__links"><a href="/#tarot">오늘의 타로</a><a href="/love.html">애정운세</a></nav>
+          <nav class="footer__links">
+            <a href="/#tarot">오늘의 타로</a>
+            <a href="/fortune/love.html">애정운세</a>
+            <a href="/fortune/money.html">금전운세</a>
+            <a href="/fortune/career.html">직업운세</a>
+          </nav>
         </div>
         <div>
           <h3 class="footer__col-title">고객지원</h3>
@@ -129,7 +133,10 @@
         </div>
         <div>
           <h3 class="footer__col-title">법적 고지</h3>
-          <nav class="footer__links"><a href="/terms.html">이용약관</a><a href="/privacy.html">개인정보처리방침</a></nav>
+          <nav class="footer__links">
+            <a href="/terms.html">이용약관</a>
+            <a href="/privacy.html">개인정보처리방침</a>
+          </nav>
         </div>
       </div>
       <div class="footer__bottom">
@@ -140,11 +147,11 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="assets/js/header.js"></script>
-  <script src="assets/js/tarot-page.js"></script>
+  <script src="../assets/js/header.js"></script>
+  <script src="../assets/js/tarot-page.js"></script>
   <script>
     AOS.init({ duration: 800, once: true, offset: 80 });
-    initTarotPage('질문자님의 썸 관계가 어떻게 발전할지 카드를 펼쳐보았습니다.', 'q4_some');
+    initTarotPage('질문자님의 이직 결정에 대해 카드를 펼쳐보았습니다.', 'q1_turnover', 'career');
   </script>
 </body>
 </html>

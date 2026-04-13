@@ -620,3 +620,205 @@
   .steps-grid { grid-template-columns: 1fr; }
   .btn--lg { padding: 16px 32px; }
 }
+
+/* ══════════════════════════════════════════
+   MAKER MODAL (이스터에그)
+══════════════════════════════════════════ */
+.footer__made {
+  text-align: center;
+  margin-top: var(--sp-4);
+}
+
+.footer__made button {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--c-text-muted);
+  letter-spacing: 0.15em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity var(--t-fast), color var(--t-fast);
+  padding: var(--sp-2) var(--sp-3);
+}
+
+.footer__made button:hover {
+  opacity: 1;
+  color: var(--c-lavender);
+}
+
+/* 모달 레이어 */
+.maker-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5);
+}
+
+.maker-modal[hidden] { display: none; }
+
+.maker-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 4, 20, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 모달 박스 */
+.maker-modal__box {
+  position: relative;
+  z-index: 1;
+  background: var(--c-bg-card);
+  border: 1px solid var(--c-glass-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-10) var(--sp-8);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-float);
+  animation: modalIn 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.maker-modal__close {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  font-size: 13px;
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.maker-modal__close:hover {
+  background: rgba(216,180,254,0.15);
+  color: var(--c-text);
+  border-color: var(--c-lavender);
+}
+
+.maker-modal__symbol {
+  font-size: 32px;
+  color: var(--c-lavender);
+  opacity: 0.6;
+  margin-bottom: var(--sp-4);
+  animation: symbolPulse 3s ease-in-out infinite;
+}
+
+@keyframes symbolPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+
+.maker-modal__title {
+  font-family: var(--font-brand);
+  font-size: var(--fs-xl);
+  font-weight: normal;
+  color: var(--c-text);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--sp-4);
+}
+
+.maker-modal__desc {
+  font-family: var(--font-serif);
+  font-size: var(--fs-sm);
+  color: var(--c-text-sub);
+  line-height: var(--lh-loose);
+  margin-bottom: var(--sp-8);
+}
+
+/* 링크 목록 */
+.maker-modal__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+
+.maker-modal__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--c-text-sub);
+  text-decoration: none;
+  transition: all var(--t-fast);
+}
+
+.maker-modal__link:hover {
+  background: rgba(216,180,254,0.1);
+  border-color: var(--c-lavender);
+  color: var(--c-lavender);
+}
+
+.maker-modal__link-icon {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* 커피 섹션 */
+.maker-modal__coffee {
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--c-border);
+}
+
+.maker-modal__coffee-text {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp-3);
+}
+
+.maker-modal__coffee-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 12px 28px;
+  background: linear-gradient(135deg, rgba(253,230,138,0.15), rgba(251,191,36,0.1));
+  border: 1px solid rgba(253,230,138,0.35);
+  border-radius: var(--r-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-gold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--t-base);
+  margin-bottom: var(--sp-3);
+}
+
+.maker-modal__coffee-btn:hover {
+  background: linear-gradient(135deg, rgba(253,230,138,0.25), rgba(251,191,36,0.2));
+  border-color: var(--c-gold);
+  box-shadow: 0 0 20px rgba(253,230,138,0.2);
+  transform: translateY(-2px);
+}
+
+.maker-modal__coffee-sub {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--c-text-muted);
+  opacity: 0.6;
+}
