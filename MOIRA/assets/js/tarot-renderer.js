@@ -11,16 +11,12 @@
  * @returns {string} 이미지 경로
  */
 function getCardImagePath(cardId) {
-  const card = TAROT_CARDS.find(c => c.id === cardId);
-  if (!card) return 'assets/images/cards/0.png';
-
-  if (card.suit) {
-    // Minor Arcana
-    return `assets/images/cards/${card.suit}/${card.number}.png`;
-  } else {
-    // Major Arcana
-    return `assets/images/cards/${cardId}.png`;
-  }
+  /* 실제 존재하는 이미지 파일 ID */
+  const AVAILABLE = [0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16];
+  /* fortune/ 서브페이지 기준 상대경로 */
+  const base = '../assets/images/cards/';
+  const id = AVAILABLE.includes(cardId) ? cardId : AVAILABLE[cardId % AVAILABLE.length];
+  return `${base}${id}.png`;
 }
 
 /**
@@ -40,14 +36,15 @@ function createCardElement(card, index) {
   button.setAttribute('data-aos-delay', String(index * 120));
 
   button.innerHTML = `
-    <div class="tarot-card__inner">
+    <div class="tarot-card__inner" style="perspective:1000px;">
       <div class="tarot-card__back">
         <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
         <p class="tarot-card__back-text">클릭하여 선택</p>
       </div>
       <div class="tarot-card__face">
         <div class="tarot-card__img">
-          <img src="${getCardImagePath(card.id)}" alt="${card.name_kr} 타로 카드" loading="lazy" width="240" height="360">
+          <img src="${getCardImagePath(card.id)}" alt="${card.name_kr} 타로 카드" loading="lazy" width="240" height="360"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
     </div>`;
