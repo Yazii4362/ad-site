@@ -47,6 +47,18 @@
   </nav>
 
   <main id="main-content" style="padding-top: 100px; min-height: 100vh;">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" style="padding: var(--sp-5) 0 0;">
+      <div class="container">
+        <ol style="display:flex;align-items:center;gap:var(--sp-2);list-style:none;font-family:var(--font-sans);font-size:var(--fs-xs);color:var(--c-text-muted);">
+          <li><a href="/" style="color:var(--c-text-muted);">홈</a></li>
+          <li style="opacity:0.4;">›</li>
+          <li><a href="/fortune/career.html" style="color:var(--c-text-muted);">직업운세</a></li>
+          <li style="opacity:0.4;">›</li>
+          <li style="color:var(--c-mint);">승진 평가</li>
+        </ol>
+      </div>
+    </nav>
     <section style="padding: var(--sp-16) 0 var(--sp-4);">
       <div class="container">
         <div style="text-align: center; max-width: 640px; margin: 0 auto;">
@@ -107,7 +119,7 @@
               </div>
             </div>
             <div class="result-card__cta">
-              <a href="career.html" class="btn btn--secondary">다른 질문 보기</a>
+              <a href="/fortune/career.html" class="btn btn--secondary">다른 질문 보기</a>
               <button id="retry-btn" class="btn btn--ghost">다시 뽑기</button>
               <a href="/" class="btn btn--ghost">홈으로</a>
             </div>
@@ -115,6 +127,16 @@
         </div>
       </div>
     </section>
+
+    <!-- Prev / Next -->
+    <nav aria-label="이전/다음 운세" style="padding: var(--sp-8) 0 var(--sp-16);">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;">
+          <a href="career-03.html" class="btn btn--ghost">← 이전 운세</a>
+          <a href="career-05.html" class="btn btn--secondary">다음 운세 →</a>
+        </div>
+      </div>
+    </nav>
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -122,7 +144,7 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <span class="footer__brand-logo">MOIRA</span>
-          <p class="footer__brand-desc">타로로 내면의 지혜를 탐구하는 공간. 당신이 이미 알고 있는 것을, 카드가 말해줍니다.</p>
+          <p class="footer__brand-desc">타로로 내면의 지혜를 탐구하는 공간. 당신이 이미 알고 있는 것을 카드가 말해줍니다.</p>
         </div>
         <div>
           <h3 class="footer__col-title">서비스</h3>

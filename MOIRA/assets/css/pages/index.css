@@ -153,14 +153,40 @@
 
 /* 타로 슬라이더 — 중앙 정렬 래퍼 */
 .swiper--tarot {
-  max-width: 900px;          /* 슬라이더 최대 너비 제한 */
-  margin-inline: auto;       /* 좌우 중앙 정렬 */
+  max-width: 860px;
+  margin-inline: auto;
   padding: var(--sp-4) var(--sp-6) var(--sp-12) !important;
   overflow: visible !important;
 }
 
+/* 슬라이드: 너비 고정, 높이는 비율로 */
 .swiper--tarot .swiper-slide {
-  max-width: 260px;          /* 카드 한 장 최대 너비 */
+  width: 200px !important;
+  height: 300px !important;          /* 200 × 3/2 = 300 */
+}
+
+/* tarot-card, inner 모두 슬라이드 크기에 맞춤 */
+.swiper--tarot .tarot-card,
+.swiper--tarot .tarot-card__inner {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;    /* aspect-ratio 무력화, height로 제어 */
+}
+
+/* 앞면: 이미지가 전체를 채움 */
+.swiper--tarot .tarot-card__face {
+  display: flex;
+  flex-direction: column;
+}
+
+.swiper--tarot .tarot-card__img {
+  flex: 1;
+  min-height: 0;
+}
+
+/* 슬라이더 카드 하단 텍스트 영역 제거 */
+.swiper--tarot .tarot-card__body {
+  display: none;
 }
 
 /* 후기 슬라이더 — max-width 제한 */
@@ -239,7 +265,8 @@
     flex-direction: column; align-items: stretch; padding-inline: var(--sp-4);
   }
   .hero__cta .btn { text-align: center; }
-  .swiper--tarot,
+  .swiper--tarot { padding-inline: var(--sp-4) !important; }
+  .swiper--tarot .swiper-slide { width: 150px !important; height: 225px !important; }
   .swiper--testimonial { padding-inline: var(--sp-5) !important; }
   .tarot-section__desc { text-align: center; }
 }

@@ -281,14 +281,38 @@
   overflow: hidden; border-radius: var(--r-lg);
 }
 
-/* Card Back — 핑크 로즈 패턴 */
+/* Card Back — 핑크 로즈 패턴 (기본) */
 .tarot-card__back {
   background: linear-gradient(160deg, #F9C5D1 0%, #E8A0B4 50%, #D4849A 100%);
+  background-size: cover;
+  background-position: center;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: var(--sp-4);
   border: 5px solid #C47A8A;
   box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35),
               inset 0 0 40px rgba(196,122,138,0.2);
+}
+
+/* data-card 속성으로 각 카드 뒷면 이미지 지정 */
+.tarot-card[data-card="0"] .tarot-card__back { background-image: url('../assets/images/cards/0.png'); }
+.tarot-card[data-card="1"] .tarot-card__back { background-image: url('../assets/images/cards/1.png'); }
+.tarot-card[data-card="2"] .tarot-card__back { background-image: url('../assets/images/cards/2.png'); }
+
+/* 뒷면 이미지 위 반투명 핑크 오버레이 — 몽환적 효과 */
+.tarot-card__back::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(232, 160, 180, 0.45);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 뒷면 텍스트/심볼은 오버레이 위에 */
+.tarot-card__back-symbol,
+.tarot-card__back-text {
+  position: relative;
+  z-index: 2;
 }
 
 .tarot-card__back::before {
@@ -297,16 +321,10 @@
   border: 1px solid rgba(255,255,255,0.45);
   border-radius: calc(var(--r-lg) - 4px);
   pointer-events: none;
+  z-index: 2;                        /* 오버레이 위 */
 }
 
-/* 뒷면 구름 패턴 */
-.tarot-card__back::after {
-  content: '☁ ☁ ☁';
-  position: absolute; bottom: 20px;
-  font-size: 18px; color: rgba(255,255,255,0.3);
-  letter-spacing: 8px;
-}
-
+/* 뒷면 심볼 */
 .tarot-card__back-symbol {
   font-family: var(--font-display);
   font-size: 44px; color: rgba(255,255,255,0.7); line-height: 1;
