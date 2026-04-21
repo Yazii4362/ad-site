@@ -432,7 +432,7 @@
       </div>
     </section>
 
-    <!-- ── 5. TODAY'S TAROT (Swiper) ── -->
+    <!-- ── 5. TODAY'S TAROT — Swiper 슬라이더 ── -->
     <section id="tarot" class="tarot-section">
       <div class="container">
         <div class="section-eyebrow" data-aos="fade-up">Today's Tarot</div>
@@ -440,103 +440,39 @@
           오늘 하루, <span>카드의 말</span>
         </h2>
         <p class="tarot-section__desc" data-aos="fade-up" data-aos-delay="100">
-          카드를 열어보세요. 당신을 위한 오늘의 메시지가 기다리고 있어요.
+          카드를 클릭하면 오늘의 메시지가 공개됩니다
         </p>
       </div>
 
-      <div class="swiper swiper--tarot" data-aos="fade-up" data-aos-delay="150" aria-label="오늘의 타로 카드 슬라이더">
-        <div class="swiper-wrapper">
-
-          <!-- Card 0: The Fool -->
-          <div class="swiper-slide">
-            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="바보 카드 뒤집기" data-card="0">
-              <div class="tarot-card__inner">
-                <div class="tarot-card__back">
-                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
-                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
-                </div>
-                <div class="tarot-card__face">
-                  <div class="tarot-card__img">
-                    <img
-                      src="assets/images/cards/0.png"
-                      alt="The Fool 타로 카드"
-                      loading="lazy"
-                      width="240"
-                      height="360"
-                      style="width:100%;height:100%;object-fit:cover;display:block;"
-                    >
-                  </div>
-                  <div class="tarot-card__body">
-                    <p class="tarot-card__tag">Major Arcana · 0</p>
-                    <h3 class="tarot-card__name">바보 · The Fool</h3>
-                    <p class="tarot-card__keyword">새로운 시작, 순수함, 모험</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card I: The Magician -->
-          <div class="swiper-slide">
-            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="마법사 카드 뒤집기" data-card="1">
-              <div class="tarot-card__inner">
-                <div class="tarot-card__back">
-                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
-                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
-                </div>
-                <div class="tarot-card__face">
-                  <div class="tarot-card__img">
-                    <img
-                      src="assets/images/cards/1.png"
-                      alt="The Magician 타로 카드"
-                      loading="lazy"
-                      width="240"
-                      height="360"
-                      style="width:100%;height:100%;object-fit:cover;display:block;"
-                    >
-                  </div>
-                  <div class="tarot-card__body">
-                    <p class="tarot-card__tag">Major Arcana · I</p>
-                    <h3 class="tarot-card__name">마법사 · The Magician</h3>
-                    <p class="tarot-card__keyword">의지, 창조력, 실현</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card II: The High Priestess -->
-          <div class="swiper-slide">
-            <div class="tarot-card" role="button" tabindex="0" aria-pressed="false" aria-label="여사제 카드 뒤집기" data-card="2">
-              <div class="tarot-card__inner">
-                <div class="tarot-card__back">
-                  <div class="tarot-card__back-symbol" aria-hidden="true">✦</div>
-                  <p class="tarot-card__back-text">클릭하여 카드 확인</p>
-                </div>
-                <div class="tarot-card__face">
-                  <div class="tarot-card__img">
-                    <img
-                      src="assets/images/cards/2.png"
-                      alt="The High Priestess 타로 카드"
-                      loading="lazy"
-                      width="240"
-                      height="360"
-                      style="width:100%;height:100%;object-fit:cover;display:block;"
-                    >
-                  </div>
-                  <div class="tarot-card__body">
-                    <p class="tarot-card__tag">Major Arcana · II</p>
-                    <h3 class="tarot-card__name">여사제 · High Priestess</h3>
-                    <p class="tarot-card__keyword">직관, 신비, 내면의 지식</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      <div class="swiper swiper--tarot" data-aos="fade-up" data-aos-delay="150" aria-label="타로 카드 슬라이더">
+        <div class="swiper-wrapper" id="tarot-swiper-wrapper">
+          <!-- JS로 78장 동적 생성 -->
         </div>
-        <div class="swiper-pagination" aria-label="슬라이드 페이지네이션"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
+
+      <!-- 오늘의 운세 결과 패널 -->
+      <div class="tarot-result" id="tarot-result" aria-live="polite" hidden>
+        <div class="container">
+          <div class="tarot-result__inner">
+            <div class="tarot-result__card-wrap">
+              <img id="tarot-result-img" src="" alt="" width="160" height="240" class="tarot-result__img">
+            </div>
+            <div class="tarot-result__content">
+              <p class="tarot-result__label">오늘의 카드</p>
+              <h3 class="tarot-result__name" id="tarot-result-name"></h3>
+              <p class="tarot-result__keywords" id="tarot-result-keywords"></p>
+              <p class="tarot-result__message" id="tarot-result-message"></p>
+              <button class="btn btn--ghost btn--sm tarot-result__close" id="tarot-result-close">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ── 6. TESTIMONIALS (Swiper) ── -->
