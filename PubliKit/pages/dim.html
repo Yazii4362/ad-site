@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>딤처리 생성기 — publiKit</title>
+  <script>(function(){const t=localStorage.getItem('publikit-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <style>
+    .preview-box {
+      min-height:300px; border-radius:var(--radius-xl); position:relative; overflow:hidden;
+      background: repeating-conic-gradient(#e0e0e0 0% 25%, #fff 0% 50%) 0 0 / 20px 20px;
+      border:var(--border-width) solid var(--border-color);
+      display:flex; align-items:center; justify-content:center;
+    }
+    [data-theme="dark"] .preview-box {
+      background: repeating-conic-gradient(#2a2a2a 0% 25%, #1a1a1a 0% 50%) 0 0 / 20px 20px;
+    }
+    .dim-overlay {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:var(--font-weight-bold); color:#fff; font-size:var(--font-size-sm);
+      transition:all 0.2s;
+    }
+    .modal-mock {
+      position:relative; z-index:1;
+      width:220px; background:#fff; border-radius:var(--radius-lg);
+      border:var(--border-width) solid #ddd; padding:var(--space-5); text-align:center;
+    }
+    .modal-mock h4 { font-size:var(--font-size-base); font-weight:var(--font-weight-bold); margin-bottom:var(--space-2); color:#1E2230; }
+    .modal-mock p  { font-size:var(--font-size-xs); color:#5A6078; margin-bottom:var(--space-4); }
+    .modal-mock button { background:var(--color-primary); color:#fff; border:none; border-radius:var(--radius-full); padding:6px 16px; font-size:var(--font-size-xs); font-weight:700; cursor:pointer; }
+
+    .hex-input-wrap { display:flex; align-items:center; gap:var(--space-2); }
+    .hex-input {
+      font-family:var(--font-mono); font-size:var(--font-size-sm);
+      padding:var(--space-2) var(--space-3); border:var(--border-width) solid var(--border-color);
+      border-radius:var(--radius-md); background:var(--bg-surface); color:var(--text-primary);
+      width:120px;
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo"><span class="logo-mark">P</span><span class="logo-text">publi<em>Kit</em></span></a>
+      <nav class="header-nav">
+        <a href="gradient.html">그라데이션</a>
+        <a href="shadow.html">그림자</a>
+        <a href="dim.html" class="active">딤처리</a>
+        <a href="font-gradient.html">텍스트 그라데이션</a>
+        <a href="button-gradient.html">버튼</a>
+        <a href="utility/web-font-convert.html">웹폰트 변환</a>
+      </nav>
+      <div class="header-actions"><button class="theme-toggle" id="theme-toggle">🌙</button></div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-hero">
+        <span class="badge badge-blue">🔲 CSS 도구</span>
+        <h1>딤처리 / 오버레이 생성기</h1>
+        <p>모달 배경용 rgba 딤처리 CSS를 z-index · position 포함 완성 코드로 즉시 생성합니다.</p>
+      </div>
+
+      <div class="tool-layout">
+        <aside class="tool-controls">
+          <div class="card" style="display:flex;flex-direction:column;gap:var(--space-5);">
+
+            <div class="control-group">
+              <span class="label">배경 색상</span>
+              <div class="hex-input-wrap">
+                <input type="color" id="dim-color" value="#000000" />
+                <input type="text" class="hex-input" id="hex-input" value="#000000" maxlength="7" />
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-row">
+                <span class="label" style="margin:0">불투명도 (Alpha)</span>
+                <span class="control-value" id="alpha-val">60%</span>
+              </div>
+              <input type="range" id="alpha" min="0" max="100" value="60" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-row">
+                <span class="label" style="margin:0">z-index</span>
+                <span class="control-value" id="zindex-val">100</span>
+              </div>
+              <input type="range" id="zindex" min="1" max="9999" step="1" value="100" />
+            </div>
+
+            <div class="control-group">
+              <span class="label">클래스명</span>
+              <input type="text" class="input" id="class-name" value="dim" placeholder="예) dim, overlay, backdrop" />
+            </div>
+
+            <div class="control-group">
+              <span class="label">position</span>
+              <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
+                <label style="display:flex;align-items:center;gap:4px;font-size:var(--font-size-sm);cursor:pointer;">
+                  <input type="radio" name="pos" value="fixed" checked /> fixed
+                </label>
+                <label style="display:flex;align-items:center;gap:4px;font-size:var(--font-size-sm);cursor:pointer;">
+                  <input type="radio" name="pos" value="absolute" /> absolute
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        <div class="tool-preview-panel">
+          <div class="card card-flat" style="padding:var(--space-4);">
+            <div class="preview-box" id="preview-box">
+              <div class="dim-overlay" id="dim-overlay"></div>
+              <div class="modal-mock">
+                <h4>모달 타이틀</h4>
+                <p>딤처리 위에 표시되는<br/>모달 예시입니다.</p>
+                <button>확인</button>
+              </div>
+            </div>
+          </div>
+          <div class="card card-flat">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-3);">
+              <span class="label" style="margin:0">생성된 CSS</span>
+              <button class="btn btn-primary btn-sm btn-copy" data-target="#code-output">복사</button>
+            </div>
+            <div class="code-block" id="code-output"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-wrap" style="margin-top:var(--space-10);align-items:center;">
+        <span class="ad-label">AD</span>
+        <div class="ad-rectangle">300 × 250 · Google AdSense</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-inner">
+    <span class="footer-copy">© 2025 publiKit.</span>
+    <nav class="footer-links"><a href="#">GitHub</a><a href="#">문의</a></nav>
+  </div></div></footer>
+  <div class="toast"></div>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    const dimColor  = document.getElementById('dim-color');
+    const hexInput  = document.getElementById('hex-input');
+    const alphaSlider = document.getElementById('alpha');
+    const alphaVal  = document.getElementById('alpha-val');
+    const zindexSlider = document.getElementById('zindex');
+    const zindexVal = document.getElementById('zindex-val');
+    const classNameEl = document.getElementById('class-name');
+    const dimOverlay = document.getElementById('dim-overlay');
+    const codeOutput = document.getElementById('code-output');
+
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+      return { r, g, b };
+    }
+
+    dimColor.addEventListener('input', () => { hexInput.value = dimColor.value; update(); });
+    hexInput.addEventListener('input', () => {
+      if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) { dimColor.value = hexInput.value; update(); }
+    });
+    alphaSlider.addEventListener('input', () => { alphaVal.textContent = alphaSlider.value + '%'; update(); });
+    zindexSlider.addEventListener('input', () => { zindexVal.textContent = zindexSlider.value; update(); });
+    classNameEl.addEventListener('input', update);
+    document.querySelectorAll('input[name="pos"]').forEach(r => r.addEventListener('change', update));
+
+    function update() {
+      const { r, g, b } = hexToRgb(dimColor.value);
+      const alpha = (alphaSlider.value / 100).toFixed(2);
+      const rgba = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      const pos = document.querySelector('input[name="pos"]:checked').value;
+      const z   = zindexSlider.value;
+      const cls = classNameEl.value || 'dim';
+
+      dimOverlay.style.background = rgba;
+
+      codeOutput.textContent =
+`.${cls} {
+  position: ${pos};
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-color: ${rgba};
+  z-index: ${z};
+}`;
+    }
+
+    update();
+  </script>
+</body>
+</html>

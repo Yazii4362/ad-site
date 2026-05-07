@@ -22,10 +22,15 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-height);
-  background: var(--bg-surface);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: var(--border-width) solid var(--border-color);
   z-index: var(--z-sticky);
   transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+[data-theme="dark"] .site-header {
+  background: rgba(26, 29, 40, 0.85);
 }
 .site-header .container {
   height: 100%;
@@ -50,11 +55,10 @@
   align-items: center;
   justify-content: center;
   width: 34px; height: 34px;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 100%);
   color: #fff;
   border-radius: var(--radius-md);
   border: 2px solid var(--color-black);
-  box-shadow: 2px 2px 0 var(--color-black);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-black);
   flex-shrink: 0;
@@ -77,11 +81,15 @@
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
   transition: background var(--transition-fast), color var(--transition-fast);
+  position: relative;
 }
-.header-nav a:hover,
-.header-nav a.active {
+.header-nav a:hover {
   background: var(--bg-surface-2);
   color: var(--text-primary);
+}
+.header-nav a.active {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 /* 헤더 우측 액션 */
@@ -107,7 +115,6 @@
 .theme-toggle:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  box-shadow: var(--shadow-sm);
   transform: translate(-1px, -1px);
 }
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>텍스트 그라데이션 — publiKit</title>
+  <script>(function(){const t=localStorage.getItem('publikit-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <style>
+    .preview-box {
+      min-height:280px; border-radius:var(--radius-xl);
+      background:var(--bg-surface); border:var(--border-width) solid var(--border-color);
+      display:flex; align-items:center; justify-content:center; padding:var(--space-8);
+      background: repeating-conic-gradient(var(--bg-surface-2) 0% 25%, var(--bg-surface) 0% 50%) 0 0 / 20px 20px;
+    }
+    .preview-text {
+      font-size:clamp(2rem, 6vw, 4rem);
+      font-weight:900;
+      background-clip:text;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-align:center;
+      line-height:1.2;
+      word-break:keep-all;
+      transition:all 0.2s;
+    }
+    .stop-list { display:flex; flex-direction:column; gap:var(--space-2); }
+    .stop-row { display:flex; align-items:center; gap:var(--space-2); background:var(--bg-surface-2); border:var(--border-width) solid var(--border-color); border-radius:var(--radius-md); padding:var(--space-2) var(--space-3); }
+    .stop-pct { font-size:var(--font-size-xs); color:var(--text-muted); }
+    .stop-pct-input { width:52px; padding:2px var(--space-2); border:var(--border-width) solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-surface); color:var(--text-primary); font-size:var(--font-size-xs); text-align:center; }
+    .type-tabs { display:flex; gap:var(--space-2); }
+    .type-tab { flex:1; padding:var(--space-2); text-align:center; border:var(--border-width) solid var(--border-color); border-radius:var(--radius-full); font-size:var(--font-size-xs); font-weight:700; background:var(--bg-surface-2); color:var(--text-secondary); cursor:pointer; transition:all var(--transition-fast); }
+    .type-tab.active { background:var(--color-primary); color:#fff; border-color:var(--color-primary); }
+  </style>
+</head>
+<body class="page-wrapper">
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo"><span class="logo-mark">P</span><span class="logo-text">publi<em>Kit</em></span></a>
+      <nav class="header-nav">
+        <a href="gradient.html">그라데이션</a>
+        <a href="shadow.html">그림자</a>
+        <a href="dim.html">딤처리</a>
+        <a href="font-gradient.html" class="active">텍스트 그라데이션</a>
+        <a href="button-gradient.html">버튼</a>
+        <a href="utility/web-font-convert.html">웹폰트 변환</a>
+      </nav>
+      <div class="header-actions"><button class="theme-toggle" id="theme-toggle">🌙</button></div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="page-hero">
+        <span class="badge badge-yellow">✦ CSS 도구</span>
+        <h1>텍스트 그라데이션 생성기</h1>
+        <p>background-clip: text 방식으로 텍스트에 그라데이션을 입히는 완성 CSS를 생성합니다.</p>
+      </div>
+
+      <div class="tool-layout">
+        <aside class="tool-controls">
+          <div class="card" style="display:flex;flex-direction:column;gap:var(--space-5);">
+
+            <div class="control-group">
+              <span class="label">미리보기 텍스트</span>
+              <input type="text" class="input" id="preview-text-input" value="publiKit" maxlength="30" />
+            </div>
+
+            <div class="control-group">
+              <span class="label">그라데이션 타입</span>
+              <div class="type-tabs">
+                <button class="type-tab active" data-type="linear">Linear</button>
+                <button class="type-tab" data-type="radial">Radial</button>
+                <button class="type-tab" data-type="conic">Conic</button>
+              </div>
+            </div>
+
+            <div class="control-group" id="angle-group">
+              <div class="control-row">
+                <span class="label" style="margin:0">각도</span>
+                <span class="control-value" id="angle-val">90°</span>
+              </div>
+              <input type="range" id="angle" min="0" max="360" value="90" />
+            </div>
+
+            <div class="control-group">
+              <div class="flex items-center justify-between" style="margin-bottom:var(--space-2);">
+                <span class="label" style="margin:0">컬러 스탑</span>
+                <button class="btn btn-outline btn-sm" id="add-stop">+ 추가</button>
+              </div>
+              <div class="stop-list" id="stop-list"></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-row">
+                <span class="label" style="margin:0">글자 크기 (미리보기)</span>
+                <span class="control-value" id="fsize-val">48px</span>
+              </div>
+              <input type="range" id="fsize" min="24" max="120" value="48" />
+            </div>
+
+          </div>
+        </aside>
+
+        <div class="tool-preview-panel">
+          <div class="card card-flat" style="padding:var(--space-4);">
+            <div class="preview-box">
+              <div class="preview-text" id="preview-text">publiKit</div>
+            </div>
+          </div>
+          <div class="card card-flat">
+            <div class="flex items-center justify-between" style="margin-bottom:var(--space-3);">
+              <span class="label" style="margin:0">생성된 CSS</span>
+              <button class="btn btn-primary btn-sm btn-copy" data-target="#code-output">복사</button>
+            </div>
+            <div class="code-block" id="code-output"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-wrap" style="margin-top:var(--space-10);align-items:center;">
+        <span class="ad-label">AD</span>
+        <div class="ad-rectangle">300 × 250 · Google AdSense</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-inner">
+    <span class="footer-copy">© 2025 publiKit.</span>
+    <nav class="footer-links"><a href="#">GitHub</a><a href="#">문의</a></nav>
+  </div></div></footer>
+  <div class="toast"></div>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    let stops = [{ color:'#1B6FFF', pos:0 }, { color:'#FFD426', pos:50 }, { color:'#2AC96B', pos:100 }];
+    let gradType = 'linear';
+
+    const previewEl    = document.getElementById('preview-text');
+    const textInput    = document.getElementById('preview-text-input');
+    const angleInput   = document.getElementById('angle');
+    const angleVal     = document.getElementById('angle-val');
+    const fsizeInput   = document.getElementById('fsize');
+    const fsizeVal     = document.getElementById('fsize-val');
+    const stopListEl   = document.getElementById('stop-list');
+    const codeOutput   = document.getElementById('code-output');
+    const angleGroup   = document.getElementById('angle-group');
+
+    document.querySelectorAll('.type-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.type-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); gradType = btn.dataset.type;
+        angleGroup.style.display = gradType === 'linear' ? 'flex' : 'none'; update();
+      });
+    });
+    textInput.addEventListener('input',  () => { previewEl.textContent = textInput.value || 'publiKit'; update(); });
+    angleInput.addEventListener('input', () => { angleVal.textContent = angleInput.value + '°'; update(); });
+    fsizeInput.addEventListener('input', () => { fsizeVal.textContent = fsizeInput.value + 'px'; previewEl.style.fontSize = fsizeInput.value + 'px'; });
+    document.getElementById('add-stop').addEventListener('click', () => { stops.push({ color:'#FF4A4A', pos:100 }); renderStops(); update(); });
+
+    function renderStops() {
+      stopListEl.innerHTML = stops.map((s,i) => `
+        <div class="stop-row">
+          <input type="color" value="${s.color}" style="width:34px;height:34px;" onchange="stops[${i}].color=this.value;update();" />
+          <input type="number" class="stop-pct-input" min="0" max="100" value="${s.pos}" onchange="stops[${i}].pos=+this.value;update();" />
+          <span class="stop-pct">%</span>
+          <span style="flex:1"></span>
+          ${stops.length>2?`<button style="color:var(--color-danger);font-size:0.9rem;padding:2px 6px;" onclick="stops.splice(${i},1);renderStops();update();">✕</button>`:''}
+        </div>`).join('');
+    }
+
+    function update() {
+      const sorted = [...stops].sort((a,b) => a.pos - b.pos);
+      const stopsStr = sorted.map(s => `${s.color} ${s.pos}%`).join(', ');
+      let grad = '';
+      if (gradType==='linear') grad = `linear-gradient(${angleInput.value}deg, ${stopsStr})`;
+      else if (gradType==='radial') grad = `radial-gradient(circle, ${stopsStr})`;
+      else grad = `conic-gradient(from 0deg, ${stopsStr})`;
+
+      previewEl.style.backgroundImage = grad;
+
+      codeOutput.textContent =
+`.gradient-text {
+  background: ${grad};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* fallback */
+}`;
+    }
+
+    renderStops(); update();
+  </script>
+</body>
+</html>

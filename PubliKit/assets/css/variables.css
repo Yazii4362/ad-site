@@ -10,9 +10,9 @@
 :root {
 
   /* ── 브랜드 원색 ── */
-  --color-blue:         #1B6FFF;
-  --color-blue-dark:    #0D4FCC;
-  --color-blue-light:   #D6E8FF;
+  --color-blue:         #2563EB;
+  --color-blue-dark:    #1D4ED8;
+  --color-blue-light:   #DBEAFE;
 
   --color-green:        #2AC96B;
   --color-green-dark:   #1CA354;
@@ -38,31 +38,31 @@
   --color-danger:       var(--color-red);
 
   /* ── 배경 ── */
-  --bg-page:            #F4F6FB;
+  --bg-page:            #F0F4FF;
   --bg-surface:         #FFFFFF;
-  --bg-surface-2:       #EEF1F9;
-  --bg-code:            #1E2230;
+  --bg-surface-2:       #EEF2FF;
+  --bg-code:            #0F172A;
 
   /* ── 텍스트 ── */
-  --text-primary:       #1E2230;
-  --text-secondary:     #5A6078;
-  --text-muted:         #9AA0B8;
+  --text-primary:       #0F172A;
+  --text-secondary:     #475569;
+  --text-muted:         #94A3B8;
   --text-inverse:       #FFFFFF;
   --text-on-primary:    #FFFFFF;
-  --text-code:          #E8EEFF;
+  --text-code:          #E2E8F0;
 
   /* ── 보더 ── */
-  --border-color:       #D8DCE8;
+  --border-color:       #CBD5E1;
   --border-width:       2px;
 
-  /* ── Solid Pop 그림자 (투명도 없음) ── */
-  --shadow-sm:          3px 3px 0px #1E2230;
-  --shadow-md:          4px 4px 0px #1E2230;
-  --shadow-lg:          6px 6px 0px #1E2230;
-  --shadow-xl:          8px 8px 0px #1E2230;
-  --shadow-primary:     4px 4px 0px var(--color-blue-dark);
-  --shadow-success:     4px 4px 0px var(--color-green-dark);
-  --shadow-warning:     4px 4px 0px var(--color-yellow-dark);
+  /* ── 그림자 없음 ── */
+  --shadow-sm:          none;
+  --shadow-md:          none;
+  --shadow-lg:          none;
+  --shadow-xl:          none;
+  --shadow-primary:     none;
+  --shadow-success:     none;
+  --shadow-warning:     none;
 
   /* ── 타이포그래피 ── */
   --font-sans:          'Pretendard', 'Noto Sans KR', sans-serif;
@@ -144,13 +144,13 @@
 
   --border-color:  #2E3248;
 
-  --shadow-sm:     3px 3px 0px #4D8FFF;
-  --shadow-md:     4px 4px 0px #4D8FFF;
-  --shadow-lg:     6px 6px 0px #4D8FFF;
-  --shadow-xl:     8px 8px 0px #4D8FFF;
-  --shadow-primary:4px 4px 0px #2260DD;
-  --shadow-success:4px 4px 0px var(--color-green-dark);
-  --shadow-warning:4px 4px 0px var(--color-yellow-dark);
+  --shadow-sm:     none;
+  --shadow-md:     none;
+  --shadow-lg:     none;
+  --shadow-xl:     none;
+  --shadow-primary:none;
+  --shadow-success:none;
+  --shadow-warning:none;
 
   --color-blue:         #4D8FFF;
   --color-blue-light:   #1A2E55;

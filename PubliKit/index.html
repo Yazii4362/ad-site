@@ -17,7 +17,23 @@
     .hero {
       text-align: center;
       padding: var(--space-20) 0 var(--space-16);
+      position: relative;
     }
+    /* 배경 장식 */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(37,99,235,0.12) 0%, rgba(37,99,235,0) 70%),
+                  radial-gradient(ellipse at 80% 60%, rgba(42,201,107,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 60%, rgba(255,212,38,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
     .hero-kicker {
       display: inline-flex;
       align-items: center;
@@ -40,7 +56,14 @@
       line-height: 1.05;
       margin-bottom: var(--space-5);
     }
-    .hero h1 .accent-blue   { color: var(--color-blue); }
+    .hero h1 .accent-blue   {
+      color: var(--color-blue);
+      background: var(--color-blue-light);
+      border-radius: var(--radius-sm);
+      padding: 0 var(--space-2);
+      display: inline-block;
+      border: 2px solid var(--color-blue);
+    }
     .hero h1 .accent-green  { color: var(--color-green); }
     .hero h1 .accent-yellow {
       background: var(--color-yellow);
@@ -48,6 +71,7 @@
       border-radius: var(--radius-sm);
       padding: 0 var(--space-2);
       display: inline-block;
+      border: 2px solid var(--color-yellow-dark);
     }
     .hero-desc {
       font-size: var(--font-size-md);
@@ -86,19 +110,29 @@
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-color);
       border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-md);
       padding: var(--space-6);
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+      transition: transform var(--transition-fast);
       text-decoration: none;
       color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--card-accent-1, var(--color-blue)), var(--card-accent-2, var(--color-green)));
+      opacity: 0;
+      transition: opacity var(--transition-fast);
     }
     .tool-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: var(--shadow-xl);
+      transform: translate(-4px, -4px);
     }
+    .tool-card:hover::before { opacity: 1; }
     .tool-icon {
       width: 52px; height: 52px;
       border-radius: var(--radius-lg);
@@ -107,7 +141,6 @@
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      box-shadow: 3px 3px 0 var(--color-black);
       flex-shrink: 0;
     }
     .tool-card h3 {
@@ -129,7 +162,7 @@
     }
     .tool-card:hover .tool-card-arrow {
       color: var(--color-primary);
-      transform: translate(2px, -2px);
+      transform: translate(3px, -3px);
     }
 
     /* 아이콘 색상 */
@@ -147,9 +180,10 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: var(--space-6);
-      padding: var(--space-8) 0;
-      border-top: var(--border-width) solid var(--border-color);
-      border-bottom: var(--border-width) solid var(--border-color);
+      padding: var(--space-8) var(--space-6);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-xl);
+      background: var(--bg-surface);
       margin-bottom: var(--space-16);
     }
     .feature-item {
@@ -182,7 +216,7 @@
         <a href="pages/dim.html">딤처리</a>
         <a href="pages/font-gradient.html">텍스트 그라데이션</a>
         <a href="pages/button-gradient.html">버튼</a>
-        <a href="pages/utility/webfont-convert.html">웹폰트 변환</a>
+        <a href="pages/utility/web-font-convert.html">웹폰트 변환</a>
       </nav>
       <div class="header-actions">
         <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드로 전환">🌙</button>
@@ -214,7 +248,7 @@
         </p>
         <div class="hero-cta">
           <a href="pages/gradient.html" class="btn btn-primary btn-lg">🎨 그라데이션 생성하기</a>
-          <a href="pages/utility/webfont-convert.html" class="btn btn-outline btn-lg">🔤 웹폰트 변환기</a>
+          <a href="pages/utility/web-font-convert.html" class="btn btn-outline btn-lg">🔤 웹폰트 변환기</a>
         </div>
       </section>
 
@@ -264,7 +298,7 @@
             <p>Hover · Active 상태까지 포함한 완성형 버튼 CSS를 한 번에 만들어 드립니다.</p>
             <span class="tool-card-arrow">→</span>
           </a>
-          <a href="pages/utility/webfont-convert.html" class="tool-card">
+          <a href="pages/utility/web-font-convert.html" class="tool-card">
             <div class="tool-icon ic-teal">🔤</div>
             <h3>웹폰트 변환기</h3>
             <p>TTF → WOFF2 변환 후 @font-face CSS + demo.html이 담긴 ZIP으로 바로 다운로드.</p>
