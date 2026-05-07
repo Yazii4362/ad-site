@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>웹폰트 변환기 — publiKit</title>
+  <script>(function(){const t=localStorage.getItem('publikit-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link rel="stylesheet" href="../../assets/css/variables.css" />
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+  <link rel="stylesheet" href="../../assets/css/layout.css" />
+  <!-- 외부 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/ttf2woff2@3.0.0/src/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <style>
+    /* ── 드롭존 ── */
+    .dropzone {
+      border: 3px dashed var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-12) var(--space-8);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      background: var(--bg-surface);
+      position: relative;
+    }
+    .dropzone.drag-over {
+      border-color: var(--color-primary);
+      background: var(--color-primary-lt);
+      transform: scale(1.01);
+    }
+    .dropzone input[type="file"] {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      opacity: 0; cursor: pointer;
+    }
+    .drop-icon { font-size: 3rem; margin-bottom: var(--space-3); }
+    .drop-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+    }
+    .drop-sub { font-size: var(--font-size-sm); color: var(--text-muted); }
+
+    /* ── 파일 리스트 ── */
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: var(--bg-surface-2);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-sm);
+    }
+    .file-item-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .file-item-name { flex: 1; font-weight: var(--font-weight-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-item-size { color: var(--text-muted); flex-shrink: 0; }
+    .file-item-status { flex-shrink: 0; }
+    .status-wait    { color: var(--text-muted); }
+    .status-loading { color: var(--color-primary); animation: spin 1s linear infinite; display: inline-block; }
+    .status-done    { color: var(--color-success); }
+    .status-error   { color: var(--color-danger); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── 진행 바 ── */
+    .progress-wrap { margin-top: var(--space-4); display: none; }
+    .progress-wrap.visible { display: block; }
+    .progress-bar-bg {
+      height: 8px;
+      background: var(--bg-surface-2);
+      border-radius: var(--radius-full);
+      border: var(--border-width) solid var(--border-color);
+      overflow: hidden;
+      margin-bottom: var(--space-2);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .progress-label {
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── 결과 영역 ── */
+    .result-section {
+      display: none;
+      margin-top: var(--space-6);
+    }
+    .result-section.visible { display: block; }
+    .result-card {
+      background: var(--color-green-light);
+      border: var(--border-width) solid var(--color-green-dark);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-success);
+      padding: var(--space-6);
+    }
+    .result-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-green-dark);
+      margin-bottom: var(--space-2);
+    }
+    .result-desc { font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--space-5); }
+    .zip-structure {
+      background: var(--bg-code);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      color: var(--text-code);
+      line-height: 1.8;
+      margin-bottom: var(--space-5);
+    }
+    .zip-structure .dir  { color: #FFD426; }
+    .zip-structure .file { color: #2AC96B; }
+    .zip-structure .desc { color: #6B7594; }
+
+    /* ── 안내 박스 ── */
+    .info-box {
+      background: var(--color-blue-light);
+      border: var(--border-width) solid var(--color-blue);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      font-size: var(--font-size-sm);
+      color: var(--text-primary);
+      line-height: var(--line-height-loose);
+    }
+    .info-box strong { color: var(--color-blue); }
+
+    [data-theme="dark"] .result-card {
+      background: var(--color-green-light);
+      border-color: var(--color-green);
+    }
+    [data-theme="dark"] .info-box {
+      background: var(--color-blue-light);
+      border-color: var(--color-blue);
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- 헤더 -->
+  <header class="site-header">
+    <div class="container">
+      <a href="../../index.html" class="logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">publi<em>Kit</em></span>
+      </a>
+      <nav class="header-nav">
+        <a href="../gradient.html">그라데이션</a>
+        <a href="../shadow.html">그림자</a>
+        <a href="../dim.html">딤처리</a>
+        <a href="../font-gradient.html">텍스트 그라데이션</a>
+        <a href="../button-gradient.html">버튼</a>
+        <a href="webfont-convert.html" class="active">웹폰트 변환</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드로 전환">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="container" style="max-width: 720px;">
+
+      <!-- 히어로 -->
+      <div class="page-hero">
+        <span class="badge badge-green">🔤 유틸리티</span>
+        <h1>웹폰트 변환기<br/><span style="color:var(--color-primary)">TTF → WOFF2</span></h1>
+        <p>TTF 파일을 업로드하면 WOFF2로 변환하고, @font-face CSS와 demo.html이 담긴 ZIP으로 즉시 다운로드합니다. 서버 전송 없이 브라우저에서 직접 처리됩니다.</p>
+      </div>
+
+      <!-- 안내 -->
+      <div class="info-box" style="margin-bottom: var(--space-6);">
+        <strong>📦 다운로드되는 ZIP 구조</strong><br/>
+        <code>[폰트명]_publiKit.zip</code> 안에 <code>fonts/[폰트명].woff2</code>, <code>style.css</code> (@font-face 완성 코드), <code>demo.html</code> (브라우저 미리보기) 3개 파일이 포함됩니다.
+      </div>
+
+      <!-- 드롭존 -->
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept=".ttf" multiple />
+        <div class="drop-icon">🗂️</div>
+        <p class="drop-title">TTF 파일을 여기에 드래그하거나 클릭하여 선택</p>
+        <p class="drop-sub">.ttf 형식만 지원 · 여러 파일 동시 변환 가능</p>
+      </div>
+
+      <!-- 파일 목록 -->
+      <div class="file-list" id="file-list"></div>
+
+      <!-- 진행 바 -->
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+        <p class="progress-label" id="progress-label">변환 준비 중...</p>
+      </div>
+
+      <!-- 변환 버튼 -->
+      <div style="display:flex; gap:var(--space-3); margin-top:var(--space-6);">
+        <button class="btn btn-primary btn-lg w-full" id="convert-btn" disabled>
+          ⚡ WOFF2로 변환 후 ZIP 다운로드
+        </button>
+        <button class="btn btn-outline" id="reset-btn" style="flex-shrink:0;" disabled>초기화</button>
+      </div>
+
+      <!-- 결과 -->
+      <div class="result-section" id="result-section">
+        <div class="result-card">
+          <p class="result-title">✅ 변환 완료!</p>
+          <p class="result-desc" id="result-desc">ZIP 파일이 다운로드되었습니다.</p>
+          <div class="zip-structure" id="zip-structure"></div>
+          <button class="btn btn-success" id="download-again-btn">↓ 다시 다운로드</button>
+        </div>
+      </div>
+
+      <!-- 하단 광고 -->
+      <div class="ad-wrap" style="margin-top: var(--space-10);">
+        <span class="ad-label">AD</span>
+        <div class="ad-rectangle">300 × 250 · Google AdSense Rectangle</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 publiKit. Made for web publishers.</span>
+        <nav class="footer-links">
+          <a href="#">GitHub</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">문의</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/font-converter.js"></script>
+  <script>
+    const converter    = new FontConverter();
+    const dropzone     = document.getElementById('dropzone');
+    const fileInput    = document.getElementById('file-input');
+    const fileListEl   = document.getElementById('file-list');
+    const convertBtn   = document.getElementById('convert-btn');
+    const resetBtn     = document.getElementById('reset-btn');
+    const progressWrap = document.getElementById('progress-wrap');
+    const progressBar  = document.getElementById('progress-bar');
+    const progressLbl  = document.getElementById('progress-label');
+    const resultSec    = document.getElementById('result-section');
+    const resultDesc   = document.getElementById('result-desc');
+    const zipStructEl  = document.getElementById('zip-structure');
+    const downloadAgain= document.getElementById('download-again-btn');
+
+    /* ── 드래그 앤 드롭 ── */
+    ['dragenter','dragover'].forEach(e => dropzone.addEventListener(e, ev => { ev.preventDefault(); dropzone.classList.add('drag-over'); }));
+    ['dragleave','drop'].forEach(e => dropzone.addEventListener(e, ev => { ev.preventDefault(); dropzone.classList.remove('drag-over'); }));
+    dropzone.addEventListener('drop', ev => handleFiles(ev.dataTransfer.files));
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    function formatBytes(b) {
+      if (b < 1024) return b + ' B';
+      if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+      return (b/1048576).toFixed(1) + ' MB';
+    }
+
+    function handleFiles(fileList) {
+      const added = converter.addFiles(fileList);
+      if (added === 0) { showToast('TTF 파일만 업로드할 수 있습니다.'); return; }
+      renderFileList();
+      convertBtn.disabled = false;
+      resetBtn.disabled = false;
+      resultSec.classList.remove('visible');
+      fileInput.value = '';
+    }
+
+    function renderFileList() {
+      fileListEl.innerHTML = converter.files.map(({ file, baseName }, i) => `
+        <div class="file-item" id="file-item-${i}">
+          <span class="file-item-icon">📄</span>
+          <span class="file-item-name">${file.name}</span>
+          <span class="file-item-size">${formatBytes(file.size)}</span>
+          <span class="file-item-status status-wait" id="status-${i}">대기</span>
+        </div>
+      `).join('');
+    }
+
+    /* ── 변환 실행 ── */
+    convertBtn.addEventListener('click', async () => {
+      convertBtn.disabled = true;
+      resetBtn.disabled = true;
+      progressWrap.classList.add('visible');
+      resultSec.classList.remove('visible');
+
+      const total = converter.files.length;
+      let done = 0;
+
+      try {
+        // 개별 변환
+        converter.results = [];
+        for (let i = 0; i < converter.files.length; i++) {
+          const entry = converter.files[i];
+          document.getElementById(`status-${i}`).className = 'file-item-status status-loading';
+          document.getElementById(`status-${i}`).textContent = '⟳';
+
+          progressLbl.textContent = `${entry.baseName} 변환 중... (${i+1}/${total})`;
+          progressBar.style.width = `${((i) / total) * 80}%`;
+
+          const result = await converter.convertOne(entry);
+          converter.results.push(result);
+
+          document.getElementById(`status-${i}`).className = 'file-item-status status-done';
+          document.getElementById(`status-${i}`).textContent = '✓';
+          done++;
+        }
+
+        progressBar.style.width = '90%';
+        progressLbl.textContent = 'ZIP 생성 중...';
+
+        const zipName = await converter.buildAndDownloadZip(msg => { progressLbl.textContent = msg; });
+
+        progressBar.style.width = '100%';
+        progressLbl.textContent = '완료!';
+
+        // 결과 표시
+        const isSingle = converter.results.length === 1;
+        const { baseName } = converter.results[0];
+        resultDesc.textContent = `${zipName} 다운로드 완료 (${total}개 폰트)`;
+        zipStructEl.innerHTML = isSingle
+          ? `<span class="dir">📦 ${baseName}_publiKit.zip</span>
+  <span class="dir">┣ 📂 fonts</span>
+  <span class="file">  ┃ ┗ 📜 ${baseName}.woff2</span>
+  <span class="file">┣ 📜 style.css</span>  <span class="desc">← @font-face 완성 코드</span>
+  <span class="file">┗ 📜 demo.html</span>  <span class="desc">← 브라우저 미리보기</span>`
+          : converter.results.map(r => `<span class="dir">📦 ${r.baseName}/</span>
+  <span class="dir">  ┣ 📂 fonts</span>
+  <span class="file">  ┃ ┗ 📜 ${r.baseName}.woff2</span>
+  <span class="file">  ┣ 📜 style.css</span>
+  <span class="file">  ┗ 📜 demo.html</span>`).join('\n');
+
+        resultSec.classList.add('visible');
+        showToast(`✓ ${total}개 폰트 변환 완료!`);
+
+      } catch (err) {
+        converter.files.forEach((_, i) => {
+          const el = document.getElementById(`status-${i}`);
+          if (el && el.textContent === '⟳') {
+            el.className = 'file-item-status status-error';
+            el.textContent = '✕';
+          }
+        });
+        progressLbl.textContent = '변환 실패: ' + err.message;
+        showToast('변환 중 오류가 발생했습니다: ' + err.message);
+        convertBtn.disabled = false;
+      } finally {
+        resetBtn.disabled = false;
+      }
+    });
+
+    /* ── 다시 다운로드 ── */
+    downloadAgain.addEventListener('click', async () => {
+      if (converter.results.length === 0) return;
+      try {
+        await converter.buildAndDownloadZip();
+        showToast('다시 다운로드했습니다.');
+      } catch(e) { showToast('오류: ' + e.message); }
+    });
+
+    /* ── 초기화 ── */
+    resetBtn.addEventListener('click', () => {
+      converter.clear();
+      fileListEl.innerHTML = '';
+      progressWrap.classList.remove('visible');
+      progressBar.style.width = '0%';
+      progressLbl.textContent = '';
+      resultSec.classList.remove('visible');
+      convertBtn.disabled = true;
+      resetBtn.disabled = true;
+      fileInput.value = '';
+    });
+  </script>
+</body>
+</html>

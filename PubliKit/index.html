@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>publiKit — 웹 퍼블리셔 CSS 유틸리티 킷</title>
+  <meta name="description" content="그라데이션, 그림자, 딤처리, 웹폰트 변환까지 — 웹 퍼블리셔를 위한 CSS 자동 생성 도구 모음" />
+  <!-- FOUC 방지 -->
+  <script>
+    (function(){const t=localStorage.getItem('publikit-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <style>
+    /* ── 히어로 ── */
+    .hero {
+      text-align: center;
+      padding: var(--space-20) 0 var(--space-16);
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-yellow-light);
+      color: var(--color-yellow-dark);
+      border: 2px solid var(--color-yellow-dark);
+      border-radius: var(--radius-full);
+      padding: var(--space-1) var(--space-4);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-5);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: var(--font-weight-black);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: var(--space-5);
+    }
+    .hero h1 .accent-blue   { color: var(--color-blue); }
+    .hero h1 .accent-green  { color: var(--color-green); }
+    .hero h1 .accent-yellow {
+      background: var(--color-yellow);
+      color: var(--color-black);
+      border-radius: var(--radius-sm);
+      padding: 0 var(--space-2);
+      display: inline-block;
+    }
+    .hero-desc {
+      font-size: var(--font-size-md);
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto var(--space-8);
+      line-height: var(--line-height-loose);
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    /* ── 도구 그리드 ── */
+    .tools-section { padding: var(--space-16) 0; }
+    .tools-section-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-black);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-2);
+    }
+    .tools-section-sub {
+      color: var(--text-secondary);
+      font-size: var(--font-size-md);
+      margin-bottom: var(--space-8);
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .tool-card {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+      color: inherit;
+    }
+    .tool-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-xl);
+    }
+    .tool-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--color-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 3px 3px 0 var(--color-black);
+      flex-shrink: 0;
+    }
+    .tool-card h3 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: -0.01em;
+    }
+    .tool-card p {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-normal);
+      flex: 1;
+    }
+    .tool-card-arrow {
+      align-self: flex-end;
+      font-size: var(--font-size-lg);
+      color: var(--text-muted);
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+    .tool-card:hover .tool-card-arrow {
+      color: var(--color-primary);
+      transform: translate(2px, -2px);
+    }
+
+    /* 아이콘 색상 */
+    .ic-blue   { background: var(--color-blue-light); }
+    .ic-green  { background: var(--color-green-light); }
+    .ic-yellow { background: var(--color-yellow-light); }
+    .ic-red    { background: var(--color-red-light); }
+    .ic-purple { background: #EDE8FF; }
+    .ic-teal   { background: #D8F8F5; }
+
+    /* ── 특징 배너 ── */
+    .features-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      padding: var(--space-8) 0;
+      border-top: var(--border-width) solid var(--border-color);
+      border-bottom: var(--border-width) solid var(--border-color);
+      margin-bottom: var(--space-16);
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+    }
+    .feature-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <!-- ══ 헤더 ══ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">publi<em>Kit</em></span>
+      </a>
+      <nav class="header-nav" aria-label="주요 메뉴">
+        <a href="pages/gradient.html">그라데이션</a>
+        <a href="pages/shadow.html">그림자</a>
+        <a href="pages/dim.html">딤처리</a>
+        <a href="pages/font-gradient.html">텍스트 그라데이션</a>
+        <a href="pages/button-gradient.html">버튼</a>
+        <a href="pages/utility/webfont-convert.html">웹폰트 변환</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드로 전환">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ 메인 ══ -->
+  <main class="page-main">
+    <div class="container">
+
+      <!-- 상단 광고 -->
+      <div class="ad-wrap" style="align-items:center; margin-bottom: var(--space-8);">
+        <span class="ad-label">AD</span>
+        <div class="ad-leaderboard">728 × 90 · Google AdSense Leaderboard</div>
+      </div>
+
+      <!-- 히어로 -->
+      <section class="hero">
+        <div class="hero-kicker">✦ 웹 퍼블리셔 전용 CSS 킷</div>
+        <h1>
+          CSS 반복 작업,<br/>
+          <span class="accent-blue">publiKit</span>이<br/>
+          <span class="accent-yellow">한 방에</span> 해결
+        </h1>
+        <p class="hero-desc">
+          그라데이션, 그림자, 딤처리, 웹폰트 변환까지 —<br/>
+          실시간 미리보기로 코드를 바로 복사하세요.
+        </p>
+        <div class="hero-cta">
+          <a href="pages/gradient.html" class="btn btn-primary btn-lg">🎨 그라데이션 생성하기</a>
+          <a href="pages/utility/webfont-convert.html" class="btn btn-outline btn-lg">🔤 웹폰트 변환기</a>
+        </div>
+      </section>
+
+      <!-- 특징 바 -->
+      <div class="features-bar">
+        <span class="feature-item"><span class="feature-dot" style="background:var(--color-blue)"></span>실시간 미리보기</span>
+        <span class="feature-item"><span class="feature-dot" style="background:var(--color-green)"></span>원클릭 코드 복사</span>
+        <span class="feature-item"><span class="feature-dot" style="background:var(--color-yellow)"></span>클라이언트 전용 (서버리스)</span>
+        <span class="feature-item"><span class="feature-dot" style="background:var(--color-red)"></span>무료 · 광고 없음</span>
+        <span class="feature-item"><span class="feature-dot" style="background:#A78BFA"></span>다크 모드 지원</span>
+      </div>
+
+      <!-- 도구 그리드 -->
+      <section class="tools-section">
+        <p class="tools-section-sub">총 6가지 도구</p>
+        <h2 class="tools-section-title">무엇을 만들어 드릴까요?</h2>
+        <p class="tools-section-sub">자주 쓰는 CSS 패턴을 클릭 몇 번으로 생성하세요.</p>
+
+        <div class="tool-grid">
+          <a href="pages/gradient.html" class="tool-card">
+            <div class="tool-icon ic-blue">🌈</div>
+            <h3>그라데이션 생성기</h3>
+            <p>Linear · Radial · Conic 지원, 컬러 스탑 추가 기능. 복잡한 그라데이션도 슬라이더로 뚝딱.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+          <a href="pages/shadow.html" class="tool-card">
+            <div class="tool-icon ic-purple">🌑</div>
+            <h3>그림자 생성기</h3>
+            <p>box-shadow · text-shadow 다중 레이어 생성. 오프셋, 블러, 스프레드, 색상 전부 제어.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+          <a href="pages/dim.html" class="tool-card">
+            <div class="tool-icon ic-red">🔲</div>
+            <h3>딤처리 / 오버레이</h3>
+            <p>모달 배경용 rgba CSS 자동 생성. z-index · position 포함 완성 코드 제공.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+          <a href="pages/font-gradient.html" class="tool-card">
+            <div class="tool-icon ic-yellow">✦</div>
+            <h3>텍스트 그라데이션</h3>
+            <p>background-clip: text 방식의 그라데이션 텍스트 CSS를 즉시 생성합니다.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+          <a href="pages/button-gradient.html" class="tool-card">
+            <div class="tool-icon ic-green">🖱️</div>
+            <h3>버튼 그라데이션</h3>
+            <p>Hover · Active 상태까지 포함한 완성형 버튼 CSS를 한 번에 만들어 드립니다.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+          <a href="pages/utility/webfont-convert.html" class="tool-card">
+            <div class="tool-icon ic-teal">🔤</div>
+            <h3>웹폰트 변환기</h3>
+            <p>TTF → WOFF2 변환 후 @font-face CSS + demo.html이 담긴 ZIP으로 바로 다운로드.</p>
+            <span class="tool-card-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+    </div><!-- /container -->
+  </main>
+
+  <!-- ══ 푸터 ══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 publiKit. Made for web publishers.</span>
+        <nav class="footer-links">
+          <a href="#">GitHub</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">문의</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
