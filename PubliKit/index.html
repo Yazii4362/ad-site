@@ -16,21 +16,23 @@
     /* ── 히어로 ── */
     .hero {
       text-align: center;
-      padding: var(--space-20) 0 var(--space-16);
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-6);
       position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, rgba(240,244,255,0.72) 0%, rgba(240,244,255,0.88) 100%),
+        url('assets/images/hero.png') center / cover no-repeat;
     }
-    /* 배경 장식 */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse at 50% 40%, rgba(37,99,235,0.12) 0%, rgba(37,99,235,0) 70%),
-                  radial-gradient(ellipse at 80% 60%, rgba(42,201,107,0.08) 0%, transparent 60%),
-                  radial-gradient(ellipse at 20% 60%, rgba(255,212,38,0.08) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
+    [data-theme="dark"] .hero {
+      background:
+        linear-gradient(to bottom, rgba(15,17,23,0.75) 0%, rgba(15,17,23,0.90) 100%),
+        url('assets/images/hero.png') center / cover no-repeat;
     }
     .hero > * { position: relative; z-index: 1; }
 
@@ -53,25 +55,18 @@
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: var(--font-weight-black);
       letter-spacing: -0.04em;
-      line-height: 1.05;
+      line-height: 1.08;
       margin-bottom: var(--space-5);
     }
-    .hero h1 .accent-blue   {
+    .hero h1 .accent-blue {
       color: var(--color-blue);
-      background: var(--color-blue-light);
-      border-radius: var(--radius-sm);
-      padding: 0 var(--space-2);
-      display: inline-block;
-      border: 2px solid var(--color-blue);
     }
-    .hero h1 .accent-green  { color: var(--color-green); }
     .hero h1 .accent-yellow {
       background: var(--color-yellow);
       color: var(--color-black);
       border-radius: var(--radius-sm);
       padding: 0 var(--space-2);
       display: inline-block;
-      border: 2px solid var(--color-yellow-dark);
     }
     .hero-desc {
       font-size: var(--font-size-md);
@@ -173,32 +168,6 @@
     .ic-purple { background: #EDE8FF; }
     .ic-teal   { background: #D8F8F5; }
 
-    /* ── 특징 배너 ── */
-    .features-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: var(--space-6);
-      padding: var(--space-8) var(--space-6);
-      border: var(--border-width) solid var(--border-color);
-      border-radius: var(--radius-xl);
-      background: var(--bg-surface);
-      margin-bottom: var(--space-16);
-    }
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      color: var(--text-secondary);
-    }
-    .feature-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
   </style>
 </head>
 <body class="page-wrapper">
@@ -243,23 +212,15 @@
           <span class="accent-yellow">한 방에</span> 해결
         </h1>
         <p class="hero-desc">
-          그라데이션, 그림자, 딤처리, 웹폰트 변환까지 —<br/>
-          실시간 미리보기로 코드를 바로 복사하세요.
+          그라데이션, 그림자, 딤처리, 웹폰트 변환을<br/>
+          실시간 미리보기로 바로 복사하세요.
+        </p>
         </p>
         <div class="hero-cta">
           <a href="pages/gradient.html" class="btn btn-primary btn-lg">🎨 그라데이션 생성하기</a>
           <a href="pages/utility/web-font-convert.html" class="btn btn-outline btn-lg">🔤 웹폰트 변환기</a>
         </div>
       </section>
-
-      <!-- 특징 바 -->
-      <div class="features-bar">
-        <span class="feature-item"><span class="feature-dot" style="background:var(--color-blue)"></span>실시간 미리보기</span>
-        <span class="feature-item"><span class="feature-dot" style="background:var(--color-green)"></span>원클릭 코드 복사</span>
-        <span class="feature-item"><span class="feature-dot" style="background:var(--color-yellow)"></span>클라이언트 전용 (서버리스)</span>
-        <span class="feature-item"><span class="feature-dot" style="background:var(--color-red)"></span>무료 · 광고 없음</span>
-        <span class="feature-item"><span class="feature-dot" style="background:#A78BFA"></span>다크 모드 지원</span>
-      </div>
 
       <!-- 도구 그리드 -->
       <section class="tools-section">
