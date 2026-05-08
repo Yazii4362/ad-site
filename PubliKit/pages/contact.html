@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문의하기 — publiKit</title>
+  <meta name="description" content="publiKit 서비스 이용 문의, 제휴 및 버그 리포트. 궁금한 점이나 피드백을 남겨주세요." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://publikit.netlify.app/pages/contact.html" />
+  <meta property="og:title"       content="문의하기 — publiKit" />
+  <meta property="og:description" content="publiKit 서비스 이용 문의, 제휴 및 버그 리포트. 궁금한 점이나 피드백을 남겨주세요." />
+  <meta property="og:image"       content="https://publikit.netlify.app/assets/images/hero.png" />
+  <meta property="og:locale"      content="ko_KR" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="문의하기 — publiKit" />
+  <meta name="twitter:description" content="publiKit 서비스 이용 문의, 제휴 및 버그 리포트." />
+  <meta name="twitter:image"       content="https://publikit.netlify.app/assets/images/hero.png" />
+  <meta name="robots"   content="noindex, follow" />
+  <link rel="canonical" href="https://publikit.netlify.app/pages/contact.html" />
+  <script>
+    (function(){const t=localStorage.getItem('publikit-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <style>
+    /* 문의 페이지 전용 미니멀 스타일 */
+    .contact-form-wrap {
+      max-width: 640px; /* 대칭적인 폭 */
+      margin: 0 auto;
+    }
+    textarea.input {
+      resize: vertical;
+      min-height: 200px;
+      line-height: var(--line-height-normal);
+    }
+    /* 개인정보 동의 영역 미니멀 */
+    .privacy-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background-color: var(--bg-surface-2);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      margin-top: var(--space-2);
+    }
+    .privacy-wrap input[type="checkbox"] {
+      margin-top: 4px;
+      width: 16px; height: 16px;
+      cursor: pointer;
+      accent-color: var(--color-primary); /* Apple Blue 체크박스 */
+    }
+    .privacy-label {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .privacy-label a {
+      color: var(--color-primary);
+      font-weight: var(--font-weight-medium);
+    }
+    .privacy-label a:hover { text-decoration: underline; }
+
+    /* 대칭적인 폼 그리드 */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+    @media (max-width: 600px) {
+      .form-grid-2 { grid-template-columns: 1fr; gap: var(--space-4); }
+    }
+
+    /* 완료 모달 */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: var(--z-modal);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .modal-backdrop.show { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-8);
+      max-width: 420px; width: 90%;
+      text-align: center;
+      transform: translateY(16px);
+      transition: transform var(--transition-base);
+    }
+    .modal-backdrop.show .modal-box { transform: translateY(0); }
+    .modal-icon { font-size: 3rem; margin-bottom: var(--space-4); }
+    .modal-title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-black);
+      margin-bottom: var(--space-3);
+    }
+    .modal-desc {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-loose);
+      margin-bottom: var(--space-6);
+    }
+  </style>
+</head>
+<body class="page-wrapper">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">publi<em>Kit</em></span>
+      </a>
+      <nav class="header-nav" aria-label="주요 메뉴">
+        <a href="gradient.html">그라데이션</a>
+        <a href="shadow.html">그림자</a>
+        <a href="dim.html">딤처리</a>
+        <a href="font-gradient.html">텍스트 그라데이션</a>
+        <a href="button-gradient.html">버튼</a>
+        <a href="utility/web-font-convert.html">웹폰트 변환</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드로 전환">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+
+      <div class="page-hero" style="text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: var(--space-10);">
+        <span class="badge">✉️ Contact</span>
+        <h1>무엇을 도와드릴까요?</h1>
+        <p>publiKit 이용 중 궁금한 점, 버그 리포트, 혹은 제휴 및 광고 문의를 남겨주세요. 확인 후 신속하게 답변해 드리겠습니다.</p>
+      </div>
+
+      <div class="contact-form-wrap">
+        <div class="card">
+          <form id="contact-form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field">
+
+            <!-- Netlify 봇 방지 hidden 필드 -->
+            <input type="hidden" name="form-name" value="contact" />
+            <p style="display:none"><input name="bot-field" /></p>
+
+            <div class="form-grid-2">
+              <div class="control-group">
+                <label for="userName" class="label">이름 / 담당자명 <span style="color:var(--color-danger)">*</span></label>
+                <input type="text" id="userName" name="name" class="input" placeholder="홍길동" required />
+              </div>
+
+              <div class="control-group">
+                <label for="userEmail" class="label">회신받을 이메일 <span style="color:var(--color-danger)">*</span></label>
+                <input type="email" id="userEmail" name="email" class="input" placeholder="example@email.com" required />
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="inquiryType" class="label">문의 유형 <span style="color:var(--color-danger)">*</span></label>
+              <select id="inquiryType" name="inquiry-type" class="input" required style="appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724%27 height=%2724%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%236E6E73%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%276 9 12 15 18 9%27%3E%3C/polyline%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px;">
+                <option value="">선택해주세요</option>
+                <option value="service">서비스 이용 문의</option>
+                <option value="bug">버그 및 오류 리포트</option>
+                <option value="partnership">제휴 및 광고 문의</option>
+                <option value="other">기타</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="message" class="label">문의 내용 <span style="color:var(--color-danger)">*</span></label>
+              <textarea id="message" name="message" class="input" placeholder="문의하실 내용을 상세히 적어주세요." required></textarea>
+            </div>
+
+            <div class="control-group" style="border-bottom: none; padding-bottom: 0;">
+              <div class="privacy-wrap">
+                <input type="checkbox" id="privacyAgree" required />
+                <label for="privacyAgree" class="privacy-label">
+                  입력하신 이름과 이메일 주소는 문의 처리를 위해서만 사용되며, 답변 완료 후 안전하게 파기됩니다.<br/>
+                  <a href="privacy.html">개인정보처리방침</a>에 동의합니다. <span style="color:var(--color-danger)">*</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--space-8); text-align: center;">
+              <button type="submit" id="submit-btn" class="btn btn-primary btn-lg" style="min-width: 200px;">문의 보내기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- 완료 모달 -->
+      <div class="modal-backdrop" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+          <div class="modal-icon">✅</div>
+          <p class="modal-title" id="modal-title">문의가 접수되었습니다</p>
+          <p class="modal-desc">빠른 시일 내에 입력하신 이메일로 답변 드리겠습니다.<br/>publiKit을 이용해 주셔서 감사합니다.</p>
+          <a href="../index.html" class="btn btn-primary">홈으로 돌아가기</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 publiKit. Made for web publishers.</span>
+        <nav class="footer-links">
+          <a href="#">GitHub</a>
+          <a href="privacy.html">개인정보처리방침</a>
+          <a href="contact.html" class="active">문의</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    const form       = document.getElementById('contact-form');
+    const modal      = document.getElementById('success-modal');
+    const submitBtn  = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '전송 중...';
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        });
+
+        if (res.ok) {
+          form.reset();
+          modal.classList.add('show');
+        } else {
+          throw new Error('서버 오류');
+        }
+      } catch (err) {
+        showToast('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = '문의 보내기';
+      }
+    });
+
+    /* 모달 바깥 클릭 시 닫기 */
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('show');
+    });
+  </script>
+</body>
+</html>

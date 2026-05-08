@@ -1,6 +1,6 @@
 /* ============================================================
-   publiKit — layout.css
-   헤더, 푸터, 사이드바, 광고 영역, 도구 페이지 공통 레이아웃
+   publiKit — layout.css (Apple HIG Style)
+   헤더, 푸터, 사이드바, 도구 페이지 미니멀 레이아웃
    ============================================================ */
 
 /* ── 페이지 래퍼 ── */
@@ -11,86 +11,82 @@
 }
 .page-main {
   flex: 1;
-  padding-top: calc(var(--header-height) + var(--space-8));
+  padding-top: calc(var(--header-height) + var(--space-12)); /* 히어로와 간격 확대 */
   padding-bottom: var(--space-16);
 }
 
 /* ════════════════════════════════════════════
-   헤더
+   헤더 (더 얇고 미니멀하게)
    ════════════════════════════════════════════ */
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-height);
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: var(--border-width) solid var(--border-color);
+  background-color: rgba(255,255,255,0.8); /* 불투명도 감소 */
+  backdrop-filter: saturate(180%) blur(20px); /* Apple 특유의 선명한 블러 */
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: var(--border-width) solid rgba(210, 210, 215, 0.6); /* 더 연한 보더 */
   z-index: var(--z-sticky);
-  transition: background-color var(--transition-base), border-color var(--transition-base);
 }
 [data-theme="dark"] .site-header {
-  background: rgba(26, 29, 40, 0.85);
+  background-color: rgba(29, 29, 31, 0.8);
+  border-bottom-color: rgba(66, 66, 69, 0.6);
 }
 .site-header .container {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
-/* 로고 */
+/* 로고 (Pop 테두리 제거 -> 미니멀 둥근 사각형) */
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-black);
+  gap: 10px;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 .logo-mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px; height: 34px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue-dark) 100%);
+  width: 28px; height: 28px;
+  background-color: var(--color-black); /* 미니멀 블랙 */
   color: #fff;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--color-black);
+  border-radius: 7px; /* iOS 아이콘 라디우스 느낌 */
+  /* borders 제거 */
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-bold);
   flex-shrink: 0;
 }
-.logo-text em {
-  font-style: normal;
-  color: var(--color-primary);
-}
+[data-theme="dark"] .logo-mark { background-color: var(--color-white); color: var(--color-black); }
+.logo-text em { font-style: normal; font-weight: var(--font-weight-regular); opacity: 0.6; } /* em은 더 약하게 */
 
-/* 헤더 내비 */
+/* 헤더 내비 (폰트 크기 미니멀 정리) */
 .header-nav {
   display: flex;
   align-items: center;
   gap: var(--space-1);
 }
 .header-nav a {
-  padding: var(--space-2) var(--space-3);
+  padding: 6px 12px;
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
-  border-radius: var(--radius-sm);
-  transition: background var(--transition-fast), color var(--transition-fast);
-  position: relative;
-}
-.header-nav a:hover {
-  background: var(--bg-surface-2);
+  font-weight: var(--font-weight-regular);
   color: var(--text-primary);
+  border-radius: var(--radius-full);
+  opacity: 0.8;
 }
+.header-nav a:hover { opacity: 1; background-color: var(--bg-surface-2); }
 .header-nav a.active {
-  background: var(--color-primary);
+  background-color: var(--color-black); /* Active는 블랙 캡슐 */
   color: #fff;
+  opacity: 1;
 }
+[data-theme="dark"] .header-nav a.active { background-color: var(--color-white); color: var(--color-black); }
 
 /* 헤더 우측 액션 */
 .header-actions {
@@ -99,106 +95,84 @@
   gap: var(--space-3);
 }
 
-/* 테마 토글 버튼 */
+/* 테마 토글 버튼 ( borders 제거, 미니멀) */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px; height: 38px;
+  width: 32px; height: 32px;
   border-radius: var(--radius-full);
-  border: var(--border-width) solid var(--border-color);
-  background: var(--bg-surface-2);
+  /* borders 제거 */
   color: var(--text-secondary);
   font-size: 1.1rem;
-  transition: all var(--transition-fast);
 }
 .theme-toggle:hover {
-  border-color: var(--color-primary);
+  background-color: var(--bg-surface-2);
   color: var(--color-primary);
-  transform: translate(-1px, -1px);
 }
 
 /* ════════════════════════════════════════════
-   광고 영역 — CLS 방지용 고정 min-size
+   광고 영역 — 미니멀 대칭 정리
    ════════════════════════════════════════════ */
 .ad-wrap {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: var(--space-12) 0;
 }
 .ad-label {
-  align-self: flex-start;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: var(--font-weight-medium);
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  margin-bottom: var(--space-1);
-  opacity: 0.7;
+  margin-bottom: var(--space-2);
 }
 
-/* 상단 리더보드 728x90 */
-.ad-leaderboard {
-  min-width: 728px;
-  min-height: 90px;
-  background: var(--bg-surface-2);
-  border: 1px dashed var(--border-color);
+.ad-leaderboard, .ad-rectangle {
+  background-color: var(--bg-surface-2);
+  border: 1px solid var(--border-color); /* 대시 보더 제거 */
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
   font-size: var(--font-size-xs);
-  margin-bottom: var(--space-8);
 }
+.ad-leaderboard { min-width: 728px; min-height: 90px; }
+.ad-rectangle { min-width: 300px; min-height: 250px; }
 
-/* 사각형 300x250 */
-.ad-rectangle {
-  min-width: 300px;
-  min-height: 250px;
-  background: var(--bg-surface-2);
-  border: 1px dashed var(--border-color);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: var(--font-size-xs);
-  margin-top: var(--space-10);
-}
-
-/* 광고와 콘텐츠 간격 (클릭 유도 방지) */
-.ad-wrap + * ,
-* + .ad-wrap { margin-top: 30px; }
 
 /* ════════════════════════════════════════════
    도구 페이지 공통 2열 레이아웃
    ════════════════════════════════════════════ */
 .tool-layout {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: var(--space-6);
+  grid-template-columns: 320px 1fr; /* 사이드바 폭 축소 */
+  gap: var(--space-10); /* 간격 확대 */
   align-items: start;
 }
 .tool-controls {
   position: sticky;
-  top: calc(var(--header-height) + var(--space-6));
+  top: calc(var(--header-height) + var(--space-8));
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
+.tool-controls .card { padding: var(--space-6); box-shadow: var(--shadow-sm); } /* 컨트롤 카드는 얇게 */
+.tool-controls .card:hover { box-shadow: var(--shadow-md); }
+
 .tool-preview-panel {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-6);
 }
 
 /* 컨트롤 카드 내부 섹션 */
 .control-group {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   padding-bottom: var(--space-4);
   border-bottom: var(--border-width) solid var(--border-color);
 }
@@ -211,52 +185,42 @@
 }
 .control-value {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-primary);
   min-width: 48px;
   text-align: right;
 }
 
-/* 미리보기 박스 */
+/* 미리보기 박스 ( borders 제거, 미니멀 그레이 배경) */
 .preview-box {
-  min-height: 240px;
-  border: var(--border-width) solid var(--border-color);
+  min-height: 320px;
+  background-color: var(--bg-surface-2); /* 그라데이션 제거 -> 미니멀 그레이 */
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: repeating-conic-gradient(var(--bg-surface-2) 0% 25%, var(--bg-surface) 0% 50%) 0 0 / 16px 16px;
-}
-
-/* 코드 출력 영역 */
-.code-output-wrap {
-  position: relative;
-}
-.code-output-wrap .btn-copy {
-  position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
 }
 
 /* ════════════════════════════════════════════
-   페이지 히어로 (각 도구 페이지 상단)
+   페이지 히어로 (미니멀 정리)
    ════════════════════════════════════════════ */
 .page-hero {
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-12);
 }
-.page-hero .badge { margin-bottom: var(--space-3); }
 .page-hero h1 {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-black);
+  font-size: var(--font-size-3xl); /* HIG Heading 스타일 */
+  font-weight: var(--font-weight-bold); /* Black 축소 */
   line-height: var(--line-height-tight);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
   margin-bottom: var(--space-3);
 }
 .page-hero p {
   font-size: var(--font-size-md);
   color: var(--text-secondary);
-  max-width: 560px;
+  max-width: 600px;
+  line-height: 1.4;
 }
 
 /* ════════════════════════════════════════════
@@ -264,8 +228,8 @@
    ════════════════════════════════════════════ */
 .site-footer {
   border-top: var(--border-width) solid var(--border-color);
-  background: var(--bg-surface);
-  padding: var(--space-8) 0;
+  background-color: var(--bg-surface-2); /* 그레이 배경 */
+  padding: var(--space-10) 0;
   margin-top: auto;
 }
 .footer-inner {
@@ -281,14 +245,13 @@
 }
 .footer-links {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-6);
 }
 .footer-links a {
   font-size: var(--font-size-xs);
-  color: var(--text-muted);
-  transition: color var(--transition-fast);
+  color: var(--text-secondary);
 }
-.footer-links a:hover { color: var(--color-primary); }
+.footer-links a:hover { color: var(--color-primary); text-decoration: underline;}
 
 /* ════════════════════════════════════════════
    반응형
@@ -296,10 +259,9 @@
 @media (max-width: 900px) {
   .tool-layout { grid-template-columns: 1fr; }
   .tool-controls { position: static; }
-  .ad-leaderboard { min-width: 100%; }
 }
 @media (max-width: 768px) {
   .header-nav { display: none; }
+  .ad-leaderboard { min-width: 100%; min-height: 60px;}
   .page-hero h1 { font-size: var(--font-size-2xl); }
-  .ad-rectangle { min-width: 100%; }
 }
